@@ -1,0 +1,20 @@
+{% extends 'layouts/baseAdmin.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Profesores Asociados al Proyecto</h1>
+    <div class="row">
+        {% for profesor in profesores %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2>{{ profesor.0 }} {{ profesor.1 }}</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Aquí puedes añadir más información si es necesario -->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

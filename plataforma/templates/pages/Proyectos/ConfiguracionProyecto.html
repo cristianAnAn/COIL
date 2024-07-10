@@ -1,0 +1,120 @@
+{% extends 'layouts/baseAdmin.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Proyectos/ConfiguracionProyecto.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% include "layouts/ClaseBase.html" %}
+{% include "pages/Modals/ConfirmarEliminarClase.html" %}
+<div class="mt-2 tarjeta">
+
+    <h1 class="titulo-1">General</h1>
+    <form action="{% url 'EditarProyecto' proyectoId codigo %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <span class="input-group-text">Nombre del proyecto</span>
+            <input type="text" class="form-control" value="{{proyectoDetails.0.1}}" name="nombre" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Materia</span>
+            <input type="text" class="form-control" value="{{proyectoDetails.0.2}}" name="materia" {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Descripción del proyecto</span>
+            <input type="text" class="form-control" value="{{proyectoDetails.0.4}}" name="descripcion" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Fecha de inicio</span>
+            <input type="date" class="form-control" value="{{fecha_inicio}}" name="fecha_inicio" id="fecha_inicio" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Fecha de fin</span>
+            <input type="date" class="form-control" value="{{fecha_fin}}" name="fecha_fin" id="fecha_fin" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Ciclo escolar</span>
+            <input type="text" class="form-control" value="{{proyectoDetails.0.7}}" name="ciclo_escolar" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Color distintivo</span>
+            <select class="form-select" name="color" id="color" {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+                <option>azul</option>
+                <option>verde</option>
+                <option>rojo</option>
+                <option>violeta</option>
+            </select>
+            <input type="text" value="{{proyectoDetails.0.9}}" style="display: none;" id="colorText" disabled>
+        </div>
+        <button class="boton" {% if proyectoDetails.0.8 == True %} disabled {% endif %}><i class="bi bi-floppy"></i> Guardar</button>
+    </form>
+</div>
+<div class="mt-2 tarjeta">
+    <h1 class="titulo-1">Enlaces</h1>
+    <div class="input-group mb-3">
+        <span class="input-group-text">Codigo del proyecto</span>
+        <span class="input-group-text" id="codigo">{{proyectoDetails.0.3}}</span>
+        <button class="boton" id="copy" onclick="copiarContenido('codigo')"><span class="material-symbols-outlined">
+                content_copy
+            </span></button>
+        <span id="mensaje" class="input-group-text" style="display: none;">Texto Copiado</span>
+    </div>
+    <form action="{% url 'ZoomProyecto' proyectoId codigo %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <span class="input-group-text">Enlace de zoom</span>
+            <input type="text" placeholder="Coloca el enlace completo: https://us06web.zoom.us/j/89173814050?pwd=IUF6PYV64C6rvM2a0B9gTTC0FaDRyI.1" class="form-control" value="{{proyectoDetails.0.10}}" name="zoom" {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+        </div>
+    
+    {% if usuario_id == proyectoDetails.0.11 %}
+    <button class="botonDelete" data-bs-toggle="modal" data-bs-target="#eliminarClase"><i class="bi bi-trash"></i>
+        Borrar proyecto</button>
+    {% endif %}
+    <button class="boton" type="submit" {% if proyectoDetails.0.8 == True %} disabled {% endif %}><i class="bi bi-floppy"></i> Guardar</button>
+    {% if proyectoDetails.0.8 == False %}
+    <a class="botonArchivar" href="{% url 'ArchivarProyecto' proyectoId codigo %}"><i class="bi bi-box-seam"></i> Archivar proyecto</a>
+    {% else %}
+    <a class="botonReactivar" href="{% url 'ReactivarProyecto' proyectoId codigo %}"><i class="bi bi-folder2-open"></i> Reactivar proyecto</a>
+    {% endif %}
+    </form>
+</div>
+<script src="{% static 'javascripts/Proyectos/ConfigurarProyectoCopiar.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fechaInicioInput = document.getElementById('fecha_inicio');
+        const fechaFinInput = document.getElementById('fecha_fin');
+
+        // Establece la fecha mínima para la fecha de inicio como la fecha actual
+        const today = new Date().toISOString().split('T')[0];
+        fechaInicioInput.min = today;
+
+        fechaInicioInput.addEventListener('change', function() {
+            const fechaInicio = new Date(this.value);
+            
+            // Bloquea las fechas anteriores a la fecha de inicio en el campo de fecha de fin
+            fechaFinInput.min = this.value;
+            
+            // Si la fecha de fin es anterior a la fecha de inicio, resetea el campo de fecha de fin
+            if (new Date(fechaFinInput.value) < fechaInicio) {
+                fechaFinInput.value = this.value;
+            }
+        });
+
+        fechaFinInput.addEventListener('change', function() {
+            const fechaFin = new Date(this.value);
+            const fechaInicio = new Date(fechaInicioInput.value);
+
+
+            // Si la fecha de fin es igual a la fecha de inicio, muestra una alerta y resetea el campo
+            if (fechaFin.getTime() === fechaInicio.getTime()) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Fecha inválida',
+                    text: 'La fecha de inicio no puede ser igual a la fecha de fin'
+                });
+                this.value = '';
+            }
+        });
+    });
+</script>
+{% endblock %}

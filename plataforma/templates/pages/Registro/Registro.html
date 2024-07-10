@@ -1,0 +1,110 @@
+{% extends 'layouts/PWA_BASE.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/Registro/Registro.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Estilos adicionales personalizados */
+        .is-valid {
+            border-color: #28a745; /* Borde verde */
+        }
+        .is-invalid {
+            border-color: #dc3545; /* Borde rojo */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">Registro de Usuario</h2>
+            <form id="registroForm" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.nombre_usuario.label_tag }}
+                    {{ form.nombre_usuario }}
+                    <div id="usernameFeedback" class="invalid-feedback">
+                        El nombre de usuario ya existe.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    {{ form.correo_institucional.label_tag }}
+                    {{ form.correo_institucional }}
+                    {% if form.correo_institucional.errors %}
+                    <div class="invalid-feedback d-block">
+                        {{ form.correo_institucional.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label_tag }}
+                    <div class="input-group">
+                        {{form.password}}
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                            <i class="bi bi-eye-slash"></i>
+                        </button>
+                    </div>
+                    <div id="passwordCriteria" class="form-text">
+                        La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial, y no pueden ser caracteres consecutivos.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    {{ form.confirmar_password.label_tag }}
+                    <div class="input-group">
+                        {{form.confirmar_password}}
+                        <button type="button" class="btn btn-outline-secondary" id="toggleConfirmPassword">
+                            <i class="bi bi-eye-slash"></i>
+                        </button>
+                    </div>
+                    <div id="passwordFeedback" class="invalid-feedback">
+                        Las contraseñas no coinciden.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    {{ form.rol.label_tag }}
+                    {{ form.rol }}
+                </div>
+                <div class="mb-3 d-flex justify-content-start">
+                    <button type="submit" class="btn btn-primary me-2">Registrar</button>
+                    <a href="{% url 'Login' %}" class="btn btn-danger" id="cancelBtn">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% if messages %}
+    {% for m in messages %}
+        <script>
+            Swal.fire({
+                title: 'Éxito',
+                text: "{{ m }}",
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 5000, // Redirigir después de 5 segundos
+                allowOutsideClick: true, // Permitir clics fuera del SweetAlert
+            }).then((result) => {
+                // Redirigir cuando el SweetAlert se cierre
+                window.location.href = "{% url 'verify_code' %}";
+            });
+
+            // También puedes usar el evento swal-overlay-click
+            Swal.getPopup().addEventListener('click', function() {
+                window.location.href = "{% url 'verify_code' %}";
+            });
+        </script>
+    {% endfor %}
+{% endif %}
+<script src="{% static 'javascripts/Registro/Registro.js' %}"></script>
+</body>
+</html>
+{% endblock %}

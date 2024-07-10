@@ -1,0 +1,46 @@
+.titulo-1{
+    font-size: 30;
+    font-weight: bold;
+}
+.tarjeta{
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    background-color: rgb(240, 240, 240);
+    text-align: center;
+}
+.boton{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #36A0ED;
+    padding: 5px 15px 5px 15px;
+    border: 0px;
+}
+.boton:hover{
+    background-color: #077fd5;
+}
+.botonDelete{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    padding: 5px 15px 5px 15px;
+    border: 0px;
+}
+.botonDelete:hover{
+    background-color: #a40f0f;
+}
+.botonArchivar{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: gray;
+    padding: 5px 15px 5px 15px;
+    border: 0px;
+}
+.botonArchivar:hover{
+    background-color: rgb(74, 74, 74);
+}

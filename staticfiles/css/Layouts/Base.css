@@ -1,0 +1,25 @@
+.round-link {
+    display: inline-block;
+    /* Para comportarse como un botón */
+    width: 50px;
+    /* Ajusta el tamaño del círculo */
+    height: 50px;
+    /* Ajusta el tamaño del círculo */
+    line-height: 50px;
+    /* Alinea el texto verticalmente */
+    border-radius: 50%;
+    /* Hace el enlace redondo */
+    text-align: center;
+    /* Centra el texto horizontalmente */
+    background-color: #007bff;
+    /* Color de fondo (ajústalo según tus necesidades) */
+    color: white;
+    /* Color del texto */
+    text-decoration: none;
+    /* Sin subrayado */
+}
+
+.round-link:hover {
+    background-color: #0056b3;
+    /* Color de fondo al pasar el mouse */
+}

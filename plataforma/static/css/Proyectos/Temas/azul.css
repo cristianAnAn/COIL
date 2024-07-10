@@ -1,0 +1,44 @@
+.titulo{
+    background-color: #0d6efd;
+}
+.boton_unirse{
+    background-color: #0d6efd;
+}
+.boton_unirse:hover{
+    background-color: #0049b6;
+}
+.icono{
+    background-color: #0d6efd;
+}
+.boton_enviar{
+    background-color: #0d6efd;
+}
+.boton_enviar:hover{
+    background-color: #0049b6;
+}
+.boton{
+    background-color: #0d6efd;
+}
+.boton:hover{
+    background-color: #0049b6;
+}
+.tema{
+    color: #0d6efd;
+}
+.nav-link{
+    color: #0d6efd;
+}
+.nav-link:hover{
+    color: #0049b6;
+}
+.card:hover{
+    background: #e4efff;
+}
+.nav-pills .nav-link.active {
+    background-color: #0d6efd; /* Cambia este valor al color deseado */
+    color: #fff; /* Cambia este valor al color de texto deseado */
+}
+.nav-pills .nav-link.active:hover {
+    background-color: #0049b6; /* Cambia este valor al color deseado */
+    color: #fff; /* Cambia este valor al color de texto deseado */
+}

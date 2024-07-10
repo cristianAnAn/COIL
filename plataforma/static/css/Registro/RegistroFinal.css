@@ -1,0 +1,30 @@
+body {
+    background: #6a11cb;
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));       color: white; /* Texto blanco */
+    margin: 0; /* Quita márgenes */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar {
+    margin-bottom: auto; /* Espacio debajo del navbar */
+}
+
+.form-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background-color: white; /* Fondo blanco del formulario */
+    color: black; /* Color del texto del formulario */
+    padding: 20px; /* Espaciado interior */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    max-width: 600px; /* Ancho máximo del formulario */
+    width: 100%; /* Ancho completo del contenedor */
+}

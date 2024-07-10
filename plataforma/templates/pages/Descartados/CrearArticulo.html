@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/CrearArticulo.css' %}">
+
+</head>
+<body>
+    <header>
+        <h1 id="titulo">Crea tu artículo</h1>
+    </header>
+   
+
+    <div id="formulario">
+        <h2>Completa los datos del artículo:</h2>
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="inputTitulo" name="titulo"><br>
+
+        <label for="contenido">Contenido:</label><br>
+        <textarea id="inputContenido" name="contenido" rows="6"></textarea><br>
+
+        <label for="autor">Autor:</label><br>
+        <input type="text" id="inputAutor" name="autor"><br>
+
+        <div class="mb-3">
+            <label for="formFileSm" class="form-label">Sube una imagen</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file">
+          </div>
+
+          <label for="autor">Citas:</label><br>
+          <input type="text" id="inputAutor" name="autor"><br>
+
+        <button onclick="actualizarArticulo()"><a href="{% url 'articulos' %}" class="text-decoration-none text-white">Lanzar Artículo</a></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+{% endblock %}

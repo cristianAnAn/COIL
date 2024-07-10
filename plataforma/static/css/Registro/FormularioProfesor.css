@@ -1,0 +1,26 @@
+    body {
+            background: #6a11cb;
+            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+            color: white;
+            /* Texto blanco */
+            margin: 0;
+            /* Quita márgenes */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .help-icon {
+            cursor: pointer;
+            margin-left: 5px;
+            color: #007bff;
+        }
+        .custom-card {
+            background-color: white;
+            /* Fondo blanco del card */
+            color: black;
+            /* Color del texto del card */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }

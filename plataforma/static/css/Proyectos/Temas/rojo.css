@@ -1,0 +1,44 @@
+.titulo{
+    background-color: red;
+}
+.boton_unirse{
+    background-color: red;
+}
+.boton_unirse:hover{
+    background-color: rgb(127, 0, 0);
+}
+.icono{
+    background-color: red;
+}
+.boton_enviar{
+    background-color: red;
+}
+.boton_enviar:hover{
+    background-color: rgb(127, 0, 0);
+}
+.boton{
+    background-color: red;
+}
+.boton:hover{
+    background-color: rgb(127, 0, 0);
+}
+.tema{
+    color: red;
+}
+.nav-link{
+    color: red;
+}
+.nav-link:hover{
+    color: rgb(127, 0, 0);
+}
+.card:hover{
+    background: rgb(255, 220, 220);
+}
+.nav-pills .nav-link.active {
+    background-color: red; /* Cambia este valor al color deseado */
+    color: #fff; /* Cambia este valor al color de texto deseado */
+}
+.nav-pills .nav-link.active:hover {
+    background-color: rgb(127, 0, 0); /* Cambia este valor al color deseado */
+    color: #fff; /* Cambia este valor al color de texto deseado */
+}

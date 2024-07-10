@@ -1,0 +1,24 @@
+.azul{
+    background-color: #f3f7fe;
+}
+.azul:hover{
+    background-color: #e4efff;
+}
+.verde{
+    background-color: #effffd;
+}
+.verde:hover{
+    background-color: #defffb;
+}
+.rojo{
+    background-color: rgb(255, 240, 240);
+}
+.rojo:hover{
+    background-color: rgb(255, 220, 220);
+}
+.violeta{
+    background-color: rgb(255, 237, 255);
+}
+.violeta:hover{
+    background-color: rgb(255, 213, 255);
+}

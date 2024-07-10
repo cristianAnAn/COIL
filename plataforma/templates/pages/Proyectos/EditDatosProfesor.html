@@ -1,0 +1,58 @@
+{% extends 'layouts/baseAdmin.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+{% include "layouts/ClaseBase.html" %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Profesor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Datos del Profesor</h1>
+        <div class="card">
+            <div class="card-header">
+                <h2>{{ profesor.nombre }} {{ profesor.apellidos }}</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" id="profesorForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="trayectoria_academica" class="form-label">Trayectoria Académica</label>
+                        {{ form.trayectoria_academica|attr:"disabled:true" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="trayectoria_profesional" class="form-label">Trayectoria Profesional</label>
+                        {{ form.trayectoria_profesional|attr:"disabled:true" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        {{ form.descripcion|attr:"disabled:true" }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="gustos_personales" class="form-label">Gustos Personales</label>
+                        {{ form.gustos_personales|attr:"disabled:true" }}
+                    </div>
+                    <button type="button" id="editButton" class="btn btn-primary">Editar</button>
+                    <button type="submit" id="saveButton" class="btn btn-success" style="display:none;">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('editButton').addEventListener('click', function() {
+            document.querySelectorAll('#profesorForm textarea').forEach(function(element) {
+                element.removeAttribute('disabled');
+            });
+            document.getElementById('editButton').style.display = 'none';
+            document.getElementById('saveButton').style.display = 'inline-block';
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

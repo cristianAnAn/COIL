@@ -1,0 +1,42 @@
+<!-- pages/modals/Perfil.html -->
+<div class="modal fade" id="verUsuario" tabindex="-1" aria-labelledby="verUsuarioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="verUsuarioLabel">Datos del Usuario</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre(s)</label>
+                        <input type="text" id="nombre" class="form-control" value="{{layout.2}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Apellido(s)</label>
+                        <input type="email" id="correo" class="form-control" value="{{layout.3}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Correo Institucional</label>
+                        <input type="text" id="telefono" class="form-control" value="{{layout.4}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        {% if layout.0 == "Alumno" %}
+                        <label for="direccion" class="form-label">Matricula/DNI</label>
+                        {% else %}
+                        <label for="direccion" class="form-label">IDMEX</label>
+                        {% endif %}
+                        <input type="text" id="direccion" class="form-control" value="{{layout.5}}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Universidad de Origen</label>
+                        <input type="text" id="direccion" class="form-control" value="{{layout.6}}" readonly>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

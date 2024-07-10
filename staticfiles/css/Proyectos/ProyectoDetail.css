@@ -1,0 +1,76 @@
+.titulo{
+    background-color: #36A0ED;
+    color: white;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.tarjeta{
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    background-color: rgb(240, 240, 240);
+    text-align: center;
+}
+.titulo-2{
+    font-weight: bold;
+    font-size: 20px;
+}
+.boton_unirse{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #36A0ED;
+    padding: 5px 15px 5px 15px;
+    border: 0px;
+}
+.boton_unirse:hover{
+    background-color: #077fd5;
+}
+.icono{
+    background-color: #36A0ED;
+    width: 35px;
+    height: 15%;
+    border-radius: 25px;
+    color: white;
+    padding-top: 3px;
+}
+.correguir{
+    display: flex;
+    text-decoration: none;
+}
+.columna{
+    display: flex;
+    flex-direction: column;
+}
+.subtexto-1{
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 20px;
+    color: black;
+}
+.subtexto-2{
+    font-weight: bold;
+    font-size: 15px;
+}
+.fecha{
+    font-weight: bold;
+    font-size: 15px;
+    color: gray;
+}
+.boton_enviar{
+    background-color: #36A0ED;
+    color: white;
+    border: 0px;
+    border-radius: 50%;
+    font-size: 20px;
+    width: 50px;
+}
+.boton_enviar:hover{
+    background-color: #077fd5;
+}
+.texto{
+    font-size: 25px;
+}

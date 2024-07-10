@@ -1,0 +1,44 @@
+.titulo{
+    background-color: purple;
+}
+.boton_unirse{
+    background-color: purple;
+}
+.boton_unirse:hover{
+    background-color: rgb(75, 1, 75);
+}
+.icono{
+    background-color: purple;
+}
+.boton_enviar{
+    background-color: purple;
+}
+.boton_enviar:hover{
+    background-color: rgb(75, 1, 75);
+}
+.boton{
+    background-color: purple;
+}
+.boton:hover{
+    background-color: rgb(75, 1, 75);
+}
+.tema{
+    color: purple;
+}
+.nav-link{
+    color: purple;
+}
+.nav-link:hover{
+    color: rgb(75, 1, 75);
+}
+.card:hover{
+    background: rgb(255, 237, 255);
+}
+.nav-pills .nav-link.active {
+    background-color: purple; /* Cambia este valor al color deseado */
+    color: #fff; /* Cambia este valor al color de texto deseado */
+}
+.nav-pills .nav-link.active:hover {
+    background-color: rgb(75, 1, 75); /* Cambia este valor al color deseado */
+    color: #fff; /* Cambia este valor al color de texto deseado */
+}

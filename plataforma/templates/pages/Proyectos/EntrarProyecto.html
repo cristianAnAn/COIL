@@ -1,0 +1,16 @@
+{% extends 'layouts/baseAdmin.html' %}
+{% load static %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <div class="card text-bg-secondary mb-3">
+            <div class="card-header"><h1>No estas en este proyecto</h1></div>
+            <div class="card-body">
+                <h2 class="card-title">Deseas inscribirte al proyecto</h2>
+                <h3 class="card-title">{{Proyecto}}</h3>
+                <a class="btn btn-primary" href="{% url 'AgregarUsuarioProyecto' proyectoCodigo codigo %}">Entrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

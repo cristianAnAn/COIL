@@ -1,0 +1,29 @@
+{% extends 'layouts/baseAdmin.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Proyectos/ProyectoDetail.css' %}">
+
+{% include "layouts/ClaseBase.html" %}
+
+<div class="container">
+    <header>
+        <h1 class="titulo">COMPAÑEROS</h1>
+    </header>
+    <section class="profesor">
+        <h2>Profesor</h2>
+        <hr>
+        {% for profesor in profesores %}
+        <p>{{profesor.0}} {{profesor.1}}</p>
+        {% endfor %}
+    </section>
+    <section class="alumnos">
+        <h2>Alumnos</h2>
+        <hr>
+        <ul>
+            {% for alumno in alumnos %}
+            <li>{{alumno.0}} {{alumno.1}}</li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}

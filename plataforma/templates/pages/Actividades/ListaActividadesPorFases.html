@@ -1,0 +1,49 @@
+{% extends 'layouts/Base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Actividades/ListaActividadesPorFases.css' %}">
+<script src="{% static 'javascripts/Actividades/ListaActividadesPorFases.js' %}"></script>
+{% include "layouts/claseBase.html" %}
+{% include "pages/Modals/CrearActividad.html" %}
+{% include "pages/Modals/CrearMaterial.html" %}
+<h1 class="titulo">Actividades</h1>
+<div class="boton-desplegable">
+    <button class="boton" onclick="toggleOpciones()"><span class="material-symbols-outlined">
+            add
+        </span> Nueva</button>
+    <div id="opciones" class="opciones-ocultas mt-2">
+        <button class="boton" data-bs-toggle="modal" data-bs-target="#crearTarea"><i class="bi bi-journal-check"></i>
+            Actividad</button>
+        <button class="boton" data-bs-toggle="modal" data-bs-target="#crearMaterial2"><i class="bi bi-lightbulb"></i>
+            Material</button>
+    </div>
+</div>
+<h2 class="tema mt-2 mb-2">Fase 1: Icebreakers</h2>
+<a class="navegacion" href="{% url 'ViAlActividades' %}">
+    <div class="icono"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor"
+            class="bi bi-journal-check" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+            <path
+                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
+            <path
+                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
+        </svg></div>
+    <div class="titulo-2">Actividad de prueba</div>
+    <div class="fecha">Se entrega el: 20/05/24</div>
+</a>
+<a class="navegacion" href="{% url 'ViAlMateriales' %}">
+    <div class="icono">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-lightbulb"
+            viewBox="0 0 16 16">
+            <path
+                d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1" />
+        </svg>
+    </div>
+    <div class="titulo-2">Material de prueba</div>
+    <div class="fecha">Publicado el: 20/05/24</div>
+</a>
+<h2 class="tema mt-2 mb-2">Fase 2: Comparative discussion</h2>
+<h2 class="tema mt-2 mb-2">Fase 3: Collaborative project work</h2>
+<h2 class="tema mt-2 mb-2">Fase 4: Presentation</h2>
+{% endblock %}
