@@ -113,7 +113,7 @@ class Proyectos(models.Model):
     id_profesor = models.ForeignKey(Profesor, on_delete=models.CASCADE)
 
 class Anuncios(models.Model):
-    comentario = models.TextField()
+    comentario = models.TextField(null=True)
     fecha = models.DateField()
     fecha_edit = models.DateField()
     id_profesor = models.ForeignKey(Profesor, null=True, on_delete=models.CASCADE)
@@ -121,6 +121,12 @@ class Anuncios(models.Model):
     id_proyecto = models.ForeignKey(Proyectos, on_delete=models.CASCADE)
 
 class Anuncios_archivos(models.Model):
+    path = models.TextField()
+    fecha = models.DateField()
+    id_anuncio= models.ForeignKey(Anuncios,on_delete=models.CASCADE)
+
+class Anuncios_links(models.Model):
+    titulo = models.TextField()
     path = models.TextField()
     fecha = models.DateField()
     id_anuncio= models.ForeignKey(Anuncios,on_delete=models.CASCADE)

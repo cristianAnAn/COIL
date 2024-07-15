@@ -108,12 +108,11 @@ class ProfesorForm(forms.ModelForm):
         model = Profesor
         fields = ['trayectoria_academica', 'trayectoria_profesional', 'descripcion', 'gustos_personales']
         widgets = {
-            'trayectoria_academica': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'trayectoria_profesional': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'gustos_personales': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'trayectoria_academica': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
+            'trayectoria_profesional': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
+            'gustos_personales': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
         }
-
 
 
 

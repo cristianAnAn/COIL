@@ -1,16 +1,34 @@
 {% extends 'layouts/baseAdmin.html' %}
+{% load static %}
+{% load widget_tweaks %}
 {% block content %}
+{% include "layouts/ClaseBase.html" %}
 <div class="container mt-5">
-    <h1 class="mb-4">Profesores Asociados al Proyecto</h1>
+    <h1 class="mb-4 text-center">Profesores Asociados al Proyecto</h1>
     <div class="row">
         {% for profesor in profesores %}
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h2>{{ profesor.0 }} {{ profesor.1 }}</h2>
+        <div class="col-md-6 col-lg-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">{{ profesor.0 }} {{ profesor.1 }}</h4>
                 </div>
                 <div class="card-body">
-                    <!-- Aquí puedes añadir más información si es necesario -->
+                    <div class="mb-3">
+                        <h5 class="card-title">Trayectoria Académica</h5>
+                        <p class="card-text">{{ profesor.3 }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="card-title">Trayectoria Profesional</h5>
+                        <p class="card-text">{{ profesor.4 }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="card-title">Descripción</h5>
+                        <p class="card-text">{{ profesor.5 }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="card-title">Gustos Personales</h5>
+                        <p class="card-text">{{ profesor.6 }}</p>
+                    </div>
                 </div>
             </div>
         </div>

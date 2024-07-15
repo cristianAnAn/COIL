@@ -1,0 +1,59 @@
+/* Estilos para la página de edición de usuario */
+
+.invalid-feedback {
+    display: none;
+}
+
+body {
+    background: #6a11cb; /* Fallback para navegadores que no soportan gradientes */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1)); /* Para Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1)); /* Estilo de fondo gradiente */
+    font-family: Arial, sans-serif;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.card {
+    border: none; /* Sin borde en la tarjeta */
+    background-color: #fff; /* Fondo blanco para la tarjeta */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.card-header {
+    background-color: transparent !important; /* Fondo transparente para el encabezado */
+    color: #000; /* Texto negro para el encabezado */
+    border-radius: 10px 10px 0 0; /* Bordes redondeados solo arriba */
+}
+
+.card-body {
+    border-radius: 0 0 10px 10px; /* Bordes redondeados solo abajo */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Azul primario para los botones */
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Gris secundario para los botones */
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Gris más oscuro al pasar el mouse */
+    border-color: #5a6268;
+}
+
+.form-control {
+    border-radius: 5px; /* Bordes redondeados para los campos de formulario */
+}

@@ -13,9 +13,11 @@
             <h6 class="card-text">{{proyecto.3}}</h6>
         </div>
         <div class="card-footer">
-            <small class="text-body-secondary fs-6">{% for profesor in listaProfesores %}{% if profesor.0 == proyecto.0 %}
-                {{ profesor.1 }} {{ profesor.2 }}{% if not forloop.last %} |{% endif %}
-            {% endif %}{% endfor %}</small>
+            <small class="text-body-secondary fs-6">
+                {% for nombre in proyecto.6 %}
+                    {{ nombre }} {% if not forloop.last %} |{% endif %}
+                {% endfor %}
+            </small>
         </div>
     </div>
 </a>

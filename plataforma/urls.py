@@ -17,7 +17,6 @@ urlpatterns = [
     path('SeguimientoActividad/<str:codigo>',views.SeguimientoActividad,name='SeguimientoActividad'),
     path('ViAlActividades/',views.ViAlActividades,name="ViAlActividades"),
     path('ViAlMateriales/',views.ViAlMateriales,name="ViAlMateriales"),
-    path('ActividadesPendientes/',views.ActividadesPendientes,name="ActividadesPendientes"),
     
     
     path('Registro/', views.Registro, name='Registro'),
@@ -25,8 +24,9 @@ urlpatterns = [
     path('Home/', views.Home, name="Home"),
     path('Logout/', views.logout_view, name='logout'),
     path('verificationcode/', views.verify_code, name='verify_code'),
+    path('EditarUsuario/', views.EditarUsuario, name='editar_usuario'),
     
-    
+    path('guardar_usuario/', views.guardar_usuario, name='guardar_usuario'),
     path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
@@ -46,13 +46,16 @@ urlpatterns = [
     path('Checkusername/', views.check_username, name='check_username'),
     path('fasesCoil/<str:codigo>',views.indexFases,name="FasesCoil"),
     path('fasesCoil/<str:codigo>/<str:nombre>',views.Fase1,name="Fase"),
+
     path('error/<str:error>',views.Error,name="Error"),
     path('Proyecto/<str:codigo>',views.UnirteProyectoPage, name="EntrarProyecto"),
     path('AgregarUsuarioProyecto/<int:proyecto>/<str:codigo>',views.AgregarUsuarioProyecto, name="AgregarUsuarioProyecto"),
     path('EditarProyecto/<int:proyecto>/<str:codigo>',views.editarProyecto, name="EditarProyecto"),
     path('ZoomProyecto/<int:proyecto>/<str:codigo>',views.zoomProyecto, name="ZoomProyecto"),
     path('ArchivarProyecto/<int:proyecto>/<str:codigo>',views.ArchivarProyecto, name="ArchivarProyecto"),
-    path('ReactivarProyecto/<int:proyecto>/<str:codigo>',views.ReactivarProyecto, name="ReactivarProyecto")
+    path('ReactivarProyecto/<int:proyecto>/<str:codigo>',views.ReactivarProyecto, name="ReactivarProyecto"),
+    path('CrearAnucio/<int:proyecto>/<str:codigo>',views.PublicarComentario,name="PublicarComentario"),
+    path('ComentarAnucio/<int:publicacion>/<str:codigo>',views.ComentarPublicacion,name="ComentarPublicacion")
     # path('articulos/',views.articulos,name="articulos"),
     # path('articulo/',views.arcticulo,name="articulo"),
 

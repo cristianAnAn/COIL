@@ -8,19 +8,19 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="">
+                <form method="POST" action="">
+                    {% csrf_token %}
                     <div class="mb-3">
                         <label for="titulo" class="form-label">Título</label>
-                        <input type="text" id="titulo" class="form-control">
+                        <input type="text" id="titulo" name="titulo" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="para" class="form-label">Para</label>
                         <select id="para" name="para" class="form-select">
                             <option value="opcion1">Todos los alumnos</option>
                             <option value="opcion2">Cristian Andres Cid Rodriguez</option>
-                            <option value="opcion2">Daniel Macedo Martinez</option>
-                            <option value="opcion2">Juan Mateo Hernandez De Luna </option>
-
+                            <option value="opcion3">Daniel Macedo Martinez</option>
+                            <option value="opcion4">Juan Mateo Hernandez De Luna</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -32,9 +32,19 @@
                         <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Link</label>
-                        <input type="text" name="" id="" class="form-control">
+                        <label for="link" class="form-label">Link</label>
+                        <input type="text" id="link" name="link" class="form-control">
                     </div>
+
+                    <div class="mb-3">
+                        <label for="fase_publicacion" class="form-label">Fase donde se publicará</label>
+                        <select id="fase_publicacion" name="fase_publicacion" class="form-select">
+                            {% for fase in fases %}
+                                <option value="{{ fase.0 }}">{{ fase.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
                     <div class="mb-3">
                         <label for="adjunto" class="form-label">Adjuntar</label>
                         <input type="file" id="adjunto" name="adjunto" class="form-control">
@@ -44,9 +54,8 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
             </div>
-
         </div>
     </div>
 </div>

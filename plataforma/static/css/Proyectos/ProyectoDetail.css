@@ -73,5 +73,14 @@
     background-color: #077fd5;
 }
 .texto{
-    font-size: 25px;
+    font-size: 20px;
+    text-align: justify;
+}
+.tarjetaComentarios{
+    border-radius: 10px;
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 50px;
+    padding-bottom: 1px;
+    background-color: rgb(222, 222, 222);
 }
