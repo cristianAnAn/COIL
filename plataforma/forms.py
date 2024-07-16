@@ -106,12 +106,13 @@ class RegistroProfesorForm(forms.ModelForm):
 class ProfesorForm(forms.ModelForm):
     class Meta:
         model = Profesor
-        fields = ['trayectoria_academica', 'trayectoria_profesional', 'descripcion', 'gustos_personales']
+        fields = ['trayectoria_academica', 'trayectoria_profesional', 'descripcion', 'gustos_personales', 'imagen']
         widgets = {
             'trayectoria_academica': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
             'trayectoria_profesional': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
             'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
             'gustos_personales': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
+            'imagen': forms.FileInput(attrs={'class': 'form-control-file'})
         }
 
 

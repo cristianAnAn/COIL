@@ -13,6 +13,11 @@
                     <h4 class="mb-0">{{ profesor.0 }} {{ profesor.1 }}</h4>
                 </div>
                 <div class="card-body">
+                    {% if profesor.7 %}
+                    <div class="mb-3 text-center">
+                        <img src="{% get_media_prefix %}{{ profesor.7 }}" class="img-fluid rounded" alt="Imagen del profesor">
+                    </div>
+                    {% endif %}
                     <div class="mb-3">
                         <h5 class="card-title">Trayectoria Académica</h5>
                         <p class="card-text">{{ profesor.3 }}</p>

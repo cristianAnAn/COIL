@@ -94,9 +94,11 @@ class Profesor(models.Model):
     trayectoria_profesional = models.TextField(null=True, blank=True)
     descripcion = models.TextField(null=True, blank=True)
     gustos_personales = models.TextField(null=True, blank=True)
-
+    imagen = models.ImageField(upload_to='imagenes_profesores', null=True, blank=True)
     def __str__(self):
         return f"{self.nombre} {self.apellidos}"
+    
+    
     
 #*Cosas agregadas por Daniel
 class Proyectos(models.Model):
@@ -114,8 +116,8 @@ class Proyectos(models.Model):
 
 class Anuncios(models.Model):
     comentario = models.TextField(null=True)
-    fecha = models.DateField()
-    fecha_edit = models.DateField()
+    fecha = models.DateTimeField()
+    fecha_edit = models.DateTimeField()
     id_profesor = models.ForeignKey(Profesor, null=True, on_delete=models.CASCADE)
     id_alumno = models.ForeignKey(Alumno, null=True, on_delete=models.CASCADE)
     id_proyecto = models.ForeignKey(Proyectos, on_delete=models.CASCADE)
@@ -125,7 +127,7 @@ class Anuncios_archivos(models.Model):
     fecha = models.DateField()
     id_anuncio= models.ForeignKey(Anuncios,on_delete=models.CASCADE)
 
-class Anuncios_links(models.Model):
+class Anuncios_enlaces(models.Model):
     titulo = models.TextField()
     path = models.TextField()
     fecha = models.DateField()
@@ -133,12 +135,11 @@ class Anuncios_links(models.Model):
 
 class Anuncios_comentarios(models.Model):
     comentario = models.TextField()
-    fecha = models.DateField()
-    fecha_edit = models.DateField()
+    fecha = models.DateTimeField()
+    fecha_edit = models.DateTimeField()
     id_profesor = models.ForeignKey(Profesor, null=True, on_delete=models.CASCADE)
     id_alumno = models.ForeignKey(Alumno, null=True, on_delete=models.CASCADE)
     id_anuncio= models.ForeignKey(Anuncios,on_delete=models.CASCADE)
-
 class Fases(models.Model):
     titulo = models.CharField(max_length=50)
     puntuacion = models.CharField(max_length=5)

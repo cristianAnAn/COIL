@@ -651,21 +651,20 @@ def ProfesorDatosPersonales(request):
         logout(request)
         return redirect('Login')
 
-    # Obtiene la instancia de Profesor para el usuario actual
     profesor = get_object_or_404(Profesor, id_usuario_id=usuario)
 
     if request.method == 'POST':
-        form = ProfesorForm(request.POST, instance=profesor)
+        form = ProfesorForm(request.POST, request.FILES, instance=profesor)
         if form.is_valid():
             form.save()
             usuario.is_firstRegister = False
-            profesor.save()
             usuario.save()
             return redirect('ListaProyectos')
     else:
         form = ProfesorForm(instance=profesor)
 
     return render(request, 'pages/Registro/DatosProfesor.html', {'form': form})
+
 
 def Registro(request):
     if request.method == 'POST':
@@ -899,7 +898,7 @@ def EditDatosProfesor(request, codigo):
         profesor = get_object_or_404(Profesor, id_usuario_id=usuario.id)
 
         if request.method == 'POST':
-            form = ProfesorForm(request.POST, instance=profesor)
+            form = ProfesorForm(request.POST, request.FILES ,instance=profesor)
             if form.is_valid():
                 form.save()
                 return redirect('EditDatosProfesor', codigo) 
