@@ -1,44 +1,44 @@
 .titulo{
-    background-color: purple;
+    background-color: #9400d3;
 }
 .boton_unirse{
-    background-color: purple;
+    background-color: #9400d3;
 }
 .boton_unirse:hover{
-    background-color: rgb(75, 1, 75);
+    background-color: #6d019b;
 }
 .icono{
-    background-color: purple;
+    background-color: #9400d3;
 }
 .boton_enviar{
-    background-color: purple;
+    background-color: #9400d3;
 }
 .boton_enviar:hover{
-    background-color: rgb(75, 1, 75);
+    background-color: #6d019b;
 }
 .boton{
-    background-color: purple;
+    background-color: #9400d3;
 }
 .boton:hover{
-    background-color: rgb(75, 1, 75);
+    background-color: #6d019b;
 }
 .tema{
-    color: purple;
+    color: #9400d3;
 }
 .nav-link{
-    color: purple;
+    color: #9400d3;
 }
 .nav-link:hover{
-    color: rgb(75, 1, 75);
+    color: #6d019b;
 }
-.card:hover{
-    background: rgb(255, 237, 255);
+.cardh:hover{
+    background: #f0d9fa;
 }
 .nav-pills .nav-link.active {
-    background-color: purple; /* Cambia este valor al color deseado */
+    background-color: #9400d3; /* Cambia este valor al color deseado */
     color: #fff; /* Cambia este valor al color de texto deseado */
 }
 .nav-pills .nav-link.active:hover {
-    background-color: rgb(75, 1, 75); /* Cambia este valor al color deseado */
+    background-color: #6d019b; /* Cambia este valor al color deseado */
     color: #fff; /* Cambia este valor al color de texto deseado */
 }

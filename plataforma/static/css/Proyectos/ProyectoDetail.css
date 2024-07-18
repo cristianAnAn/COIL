@@ -82,5 +82,11 @@
     padding-top: 10px;
     padding-left: 50px;
     padding-bottom: 1px;
+    padding-right: 10px;
     background-color: rgb(222, 222, 222);
+}
+.comentarioConfig{
+    font-size: 20px;
+    color: gray;
+    text-decoration: none;
 }

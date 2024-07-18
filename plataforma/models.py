@@ -157,3 +157,13 @@ class Alumnos_proyecto(models.Model):
 
 #!Falta tareas, materiales y presentación profesor
 #*Cosas de Mateo
+
+class Materiales(models.Model):
+    tema = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    id_fase = models.BigIntegerField()
+    id_profesor = models.IntegerField()
+    
+    def _str_(self):
+        return self.titulo

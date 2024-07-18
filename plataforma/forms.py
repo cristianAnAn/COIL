@@ -53,21 +53,26 @@ class RegistroAlumnoForm(forms.ModelForm):
 
     class Meta:
         model = Alumno
-        fields = ['nombre', 'apellidos' , 'matricula_dni', 'universidad_origen', 'genero']
+        fields = ['nombre', 'apellidos', 'matricula_dni', 'universidad_origen', 'genero']
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'pattern': '[A-Za-záéíóúÁÉÍÓÚñÑ ]+', 'title': 'Ingrese solo letras y espacios'}),
             'apellidos': forms.TextInput(attrs={'class': 'form-control', 'pattern': '[A-Za-záéíóúÁÉÍÓÚñÑ ]+', 'title': 'Ingrese solo letras y espacios'}),
-            'matricula_dni': forms.NumberInput(attrs={'class': 'form-control', 'min': '10000000', 'max': '99999999999',  'step': '1'}),
-            'genero': forms.Select(attrs={'class': 'form-control'})
+            'matricula_dni': forms.NumberInput(attrs={'class': 'form-control', 'minlength': '8', 'maxlength': '12', 'pattern': r'\d{8,12}', 'title': 'Ingrese solo números entre 8 y 12 dígitos'}),
+            'genero': forms.Select(attrs={'class': 'form-select'}),
         }
+
     def clean_universidad_origen(self):
         universidad_origen = self.cleaned_data.get('universidad_origen')
         if universidad_origen == '':
             return None
         return universidad_origen
 
+    def clean_matricula_dni(self):
+        matricula_dni = self.cleaned_data.get('matricula_dni')
+        if not (8 <= len(str(matricula_dni)) <= 12):
+            raise forms.ValidationError("La matrícula/DNI debe tener entre 8 y 12 dígitos.")
+        return matricula_dni
 
-# Formulario Registro Profesor (REGISTRO)
 class RegistroProfesorForm(forms.ModelForm):
     GENERO_CHOICES = [
         ('', 'Seleccione'),  # Opción por defecto
@@ -92,15 +97,21 @@ class RegistroProfesorForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'pattern': '[A-Za-záéíóúÁÉÍÓÚñÑ ]+', 'title': 'Ingrese solo letras y espacios'}),
             'apellidos': forms.TextInput(attrs={'class': 'form-control', 'pattern': '[A-Za-záéíóúÁÉÍÓÚñÑ ]+', 'title': 'Ingrese solo letras y espacios'}),
-            'idmex_dni': forms.NumberInput(attrs={'class': 'form-control', 'min': '10000000', 'max': '99999999999', 'step': '1'}),
-            'genero': forms.Select(attrs={'class': 'form-control'}),
+            'idmex_dni': forms.NumberInput(attrs={'class': 'form-control', 'minlength': '8', 'maxlength': '12', 'pattern': r'\d{8,12}', 'title': 'Ingrese solo números entre 8 y 12 dígitos'}),
+            'genero': forms.Select(attrs={'class': 'form-select'}),
         }
+
     def clean_universidad_origen(self):
         universidad_origen = self.cleaned_data.get('universidad_origen')
         if universidad_origen == '':
             return None
         return universidad_origen
 
+    def clean_idmex_dni(self):
+        idmex_dni = self.cleaned_data.get('idmex_dni')
+        if not (8 <= len(str(idmex_dni)) <= 12):
+            raise forms.ValidationError("El IDMEX/DNI debe tener entre 8 y 12 dígitos.")
+        return idmex_dni
 
 
 class ProfesorForm(forms.ModelForm):
@@ -112,7 +123,7 @@ class ProfesorForm(forms.ModelForm):
             'trayectoria_profesional': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
             'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
             'gustos_personales': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
-            'imagen': forms.FileInput(attrs={'class': 'form-control-file'})
+            'imagen': forms.FileInput(attrs={'class': 'form-control'})
         }
 
 

@@ -63,11 +63,8 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="universidad_origen" class="form-label">Universidad de
-                                        origen:</label>
+                                    <label for="universidad_origen" class="form-label">Universidad de origen:</label>
                                     <div class="input-group">
                                         {{ form.universidad_origen }}
                                         {% if form.universidad_origen.errors %}
@@ -88,6 +85,8 @@
                                         </button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="genero" class="form-label">Género:</label>
                                     <div class="input-group">
@@ -98,15 +97,14 @@
                                         </div>
                                         {% endif %}
                                         <span tabindex="0" class="input-group-text" data-bs-toggle="popover"
-                                            data-bs-trigger="focus"
-                                            data-bs-content="Seleccione su género.">
+                                            data-bs-trigger="focus" data-bs-content="Seleccione su género.">
                                             <i class="bi bi-question-circle-fill"></i>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start ">
-                                <button type="submit" class="btn btn-primary btn-sm me-2">Enviar</button>
+                                <button type="submit" class="btn btn-primary me-2">Enviar</button>
                                 <a href="{% url 'logout' %}" class="btn btn-danger" id="cancelBtn">Cancelar</a>
                             </div>
                         </form>
@@ -119,28 +117,28 @@
     <!-- Incluir el modal -->
     {% include 'pages/Modals/AgregarUniversidad.html' %}
 
-    {% if messages  %}
-    {% for m in messages %}
-        <script>
-            Swal.fire({
-                title: 'Exito',
-                text: "{{m}}",
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 5000, // Redirigir después de 5 segundos
-                allowOutsideClick: true, // Permitir clics fuera del SweetAlert
-            }).then((result) => {
-                // Redirigir cuando el SweetAlert se cierre
-                window.location.href = "{% url 'ProfesorDatosPersonales' %}";
-            });
+    {% if messages %}
+        {% for m in messages %}
+            <script>
+                Swal.fire({
+                    title: 'Éxito',
+                    text: "{{ m }}",
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 5000, // Redirigir después de 5 segundos
+                    allowOutsideClick: true, // Permitir clics fuera del SweetAlert
+                }).then((result) => {
+                    // Redirigir cuando el SweetAlert se cierre
+                    window.location.href = "{% url 'ProfesorDatosPersonales' %}";
+                });
 
-            // También puedes usar el evento swal-overlay-click
-            Swal.getPopup().addEventListener('click', function() {
-                window.location.href = "{% url 'ProfesorDatosPersonales' %}";
-            });
-        </script>
-    {% endfor %}
-{% endif %} 
+                // También puedes usar el evento swal-overlay-click
+                Swal.getPopup().addEventListener('click', function() {
+                    window.location.href = "{% url 'ProfesorDatosPersonales' %}";
+                });
+            </script>
+        {% endfor %}
+    {% endif %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -148,7 +146,7 @@
 
     <script>
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl)
         })
     </script>

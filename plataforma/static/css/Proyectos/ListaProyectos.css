@@ -16,9 +16,70 @@
 .rojo:hover{
     background-color: rgb(255, 220, 220);
 }
-.violeta{
+.purpura{
     background-color: rgb(255, 237, 255);
 }
-.violeta:hover{
+.purpura:hover{
     background-color: rgb(255, 213, 255);
+}
+/**Nuevos colores*/
+.rosa{
+    background-color: rgb(252, 239, 241);
+}
+.rosa:hover{
+    background-color: rgb(255, 216, 222);
+}
+.celeste{
+    background-color: #e6f4f8;
+}
+.celeste:hover{
+    background-color: #cef4ff;
+}
+.rojoOscuro{
+    background-color: #f1d9d9;
+}
+.rojoOscuro:hover{
+    background-color: #deb1b1;
+}
+.chocolate{
+    background-color: #fef4f2;
+}
+.chocolate:hover{
+    background-color: #ddc5c0;
+}
+.verdeClaro{
+    background-color: #eafff5;
+}
+.verdeClaro{
+    background-color: #c4ffe2;
+}
+.verdeOscuro{
+    background-color: #f2fff9;
+}
+.verdeOscuro:hover{
+    background-color: #d0eee0;
+}
+.dorado{
+    background-color: #f0eada;
+}
+.dorado:hover{
+    background-color: #ebdcb3;
+}
+.salmon{
+    background-color: #f9dfdb;
+}
+.salmon:hover{
+    background-color: #f0bdb5;
+}
+.violeta{
+    background-color: #f0d9fa;
+}
+.violeta:hover{
+    background-color: #d1ace1;
+}
+.azulOscuro{
+    background-color: #e6f1ff;
+}
+.azulOscuro:hover{
+    background-color: #a4c0e8;
 }

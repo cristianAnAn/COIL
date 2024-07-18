@@ -2,7 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 {% block content %}
-{% include "layouts/ClaseBase.html" %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,39 +10,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos del Profesor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .card-header h2 {
+            font-size: 1.5rem;
+            color: #6c757d;
+        }
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .form-control {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+        }
+        .img-preview {
+            max-width: 100%;
+            height: auto;
+        }
+        .img-caption {
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            margin-right: 10px;
+        }
+        .image-caption {
+            flex: 1;
+            text-align: center;
+        }
+        .btn-primary, .btn-success {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+    {% include "layouts/ClaseBase.html" %}
     <div class="container mt-5">
         <h1 class="mb-4">Datos del Profesor</h1>
         <div class="card">
-            <div class="card-header">
-                <h2>{{ profesor.nombre }} {{ profesor.apellidos }}</h2>
+            <div class="card-header titulo">
+                <h2 style="color: white;">{{ profesor.nombre }} {{ profesor.apellidos }}</h2>
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data" id="profesorForm">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="trayectoria_academica" class="form-label">Trayectoria Académica</label>
-                        {{ form.trayectoria_academica|attr:"disabled:true" }}
+                        {{ form.trayectoria_academica|attr:"class:form-control"|attr:"disabled:true" }}
                     </div>
                     <div class="mb-3">
                         <label for="trayectoria_profesional" class="form-label">Trayectoria Profesional</label>
-                        {{ form.trayectoria_profesional|attr:"disabled:true" }}
+                        {{ form.trayectoria_profesional|attr:"class:form-control"|attr:"disabled:true" }}
                     </div>
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción</label>
-                        {{ form.descripcion|attr:"disabled:true" }}
+                        {{ form.descripcion|attr:"class:form-control"|attr:"disabled:true" }}
                     </div>
                     <div class="mb-3">
                         <label for="gustos_personales" class="form-label">Gustos Personales</label>
-                        {{ form.gustos_personales|attr:"disabled:true" }}
+                        {{ form.gustos_personales|attr:"class:form-control"|attr:"disabled:true" }}
                     </div>
                     <div class="mb-3">
-                        <label for="imagen" class="form-label">Imagen</label>
-                        {{ form.imagen|attr:"disabled:true" }}
+                        <label for="imagen" class="form-label">Nueva Foto</label>
+                        {{ form.imagen|attr:"class:form-control"|attr:"disabled:true" }}
                     </div>
-                    <button type="button" id="editButton" class="btn btn-primary">Editar</button>
-                    <button type="submit" id="saveButton" class="btn btn-success" style="display:none;">Guardar</button>
+                    <div class="image-container">
+                        <div>
+                            <img id="imagenPreview" src="#" alt="Vista previa de la imagen" class="img-preview" style="display: none;"/>
+                            <div class="img-caption" id="imagenPreviewCaption" style="display: none;">Imagen Nueva</div>
+                        </div>
+                        {% if profesor.imagen %}
+                        <div>
+                            <img src="{{ profesor.imagen.url }}" class="img-fluid rounded img-preview" alt="Imagen del profesor">
+                            <div class="img-caption">Imagen Anterior</div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="editButton" class="btn btn-primary">Editar</button>
+                        <button type="submit" id="saveButton" class="btn btn-success" style="display:none;">Guardar</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -52,11 +109,42 @@
         document.getElementById('editButton').addEventListener('click', function() {
             document.querySelectorAll('#profesorForm textarea, #profesorForm input').forEach(function(element) {
                 element.removeAttribute('disabled');
+                element.classList.add('form-control');
             });
             document.getElementById('editButton').style.display = 'none';
             document.getElementById('saveButton').style.display = 'inline-block';
         });
+        document.getElementById('id_imagen').addEventListener('change', function(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('imagenPreview');
+                var caption = document.getElementById('imagenPreviewCaption');
+                output.src = reader.result;
+                output.style.display = 'block';
+                caption.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
     </script>
+
+    {% if messages %}
+    {% for m in messages %}
+        <script>
+            Swal.fire({
+                title: 'Éxito',
+                text: "{{ m }}",
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 5000, // Cerrar después de 5 segundos
+                allowOutsideClick: true, // Permitir clics fuera del SweetAlert
+            });
+        </script>
+    {% endfor %}
+{% endif %}
+
+
+
+
 </body>
 </html>
 {% endblock %}

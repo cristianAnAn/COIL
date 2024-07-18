@@ -38,10 +38,18 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Color distintivo</span>
             <select class="form-select" name="color" id="color" {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
-                <option>azul</option>
-                <option>verde</option>
-                <option>rojo</option>
-                <option>violeta</option>
+                <option value="azul">Azul</option>
+                <option value="azulOscuro">Azul Oscuro</option>
+                <option value="celeste">Celeste</option>
+                <option value="chocolate">Chocolate</option>
+                <option value="dorado">Dorado</option>
+                <option value="purpura">Púrpura</option>
+                <option value="violeta">Violeta</option>
+                <option value="rosa">Rosa</option>
+                <option value="rojo">Rojo</option>
+                <option value="rojoOscuro">Rojo Oscuro</option>
+                <option value="salmon">Salmón</option>
+                <option value="verde">Verde</option>
             </select>
             <input type="text" value="{{proyectoDetails.0.9}}" style="display: none;" id="colorText" disabled>
         </div>
