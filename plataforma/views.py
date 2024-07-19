@@ -16,7 +16,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.template.loader import render_to_string
 # Create your views here.
 def index(request):
@@ -685,21 +685,28 @@ def Registro(request):
             # Generar el código de verificación
             codigo_verificacion = get_random_string(6, allowed_chars='0123456789')
 
-            # Enviar el correo de verificación
+            # Construir la URL de verificación
+            verification_url = request.build_absolute_uri(reverse('verify_code'))
+
+            # Enviar el correo de verificación con el enlace
+            mensaje = (
+                f'Tu código de verificación es: {codigo_verificacion}.\n'
+                f'Para verificar tu cuenta, por favor sigue este enlace: {verification_url}'
+            )
             send_mail(
                 'Código de verificación',
-                f'Tu código de verificación es: {codigo_verificacion}',
+                mensaje,
                 'from@example.com',
                 [form.cleaned_data['correo_institucional']],
                 fail_silently=False,
             )
-            
+
             # Guardar el código de verificación en la sesión
             request.session['codigo_verificacion'] = codigo_verificacion
             request.session['correo_institucional'] = form.cleaned_data['correo_institucional']
 
-            messages.success(request, "Se envio un codigo para la verificacion del correo")
-            # return redirect('verify_code')  # Redirigir a la vista de verificación de código
+            messages.success(request, "Se envio un codigo para la verificacion del correo, sera reedirigido a una pagina para verificar tu codigo")
+            # # Redirigir a la vista de verificación de código
     else:
         form = RegistroForm()
 
@@ -732,12 +739,27 @@ def verify_code(request):
 
                     usuario.save()  # Guardar el usuario con el correo institucional
 
-                    messages.success(request, "Codigo correcto, Usuario registrado correctamente")
+                    # Enviar correo de bienvenida
+                    url_sistema = request.build_absolute_uri(reverse('Login'))  # Ajusta 'home' al nombre de tu vista principal
+                    mensaje_bienvenida = (
+                        f'Bienvenido al sistema, {usuario.nombre_usuario}.\n\n'
+                        f'Puedes acceder al sistema utilizando el siguiente enlace: {url_sistema}\n\n'
+                        'Gracias por unirte a nosotros.'
+                    )
+                    send_mail(
+                        'Bienvenida al Sistema',
+                        mensaje_bienvenida,
+                        'from@example.com',
+                        [usuario.correo_institucional],
+                        fail_silently=False,
+                    )
+
+                    messages.success(request, "Código correcto, Usuario registrado correctamente. Serás redirigido a una página para iniciar sesión.")
                     del request.session['registro_form_data']
                     del request.session['codigo_verificacion']
                     del request.session['correo_institucional']
 
-                    # return redirect('ListaProyectos')  # Redirigir a la página deseada después del registro
+                    #return redirect('Login')  # Redirigir a la página deseada después del registro
 
             else:
                 form.add_error('code', 'Código de verificación incorrecto.')
@@ -745,6 +767,7 @@ def verify_code(request):
         form = VerificationCodeForm()
 
     return render(request, 'pages/Registro/VerificarCodigo.html', {'form': form})
+
 
 @login_required(login_url='Login')
 def save_other_university(request):

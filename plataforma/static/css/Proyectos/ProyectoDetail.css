@@ -90,3 +90,21 @@
     color: gray;
     text-decoration: none;
 }
+/*!negro*/
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #36A0ED;
+    padding: 5px 15px 5px 15px;
+    border: 0px;
+    text-decoration: none;
+}
+
+.custom-file-upload:hover {
+    background-color: #077fd5;
+}

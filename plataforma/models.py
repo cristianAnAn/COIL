@@ -52,9 +52,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):
         return self.is_admin
 
-
-
-
 class Catalogo(models.Model):
     nombre_universidad = models.CharField(max_length=200)
     pais = models.CharField(max_length=100)

@@ -44,7 +44,7 @@
         method="post"
       >
         {% csrf_token %}
-        <div class="input-group mb-3 input-group-lg">
+        <div class="input-group mb-1 input-group-lg">
           <textarea
             class="form-control px-2"
             placeholder="Publica algo..."
@@ -63,6 +63,13 @@
               />
             </svg>
           </button>
+        </div>
+        <div class="mb-3">
+          <button type="button" class="boton_unirse"><i class="bi bi-link-45deg"></i> Enlaces</button>
+          <label for="files" class="custom-file-upload boton">
+            <i class="bi bi-journals"></i> Archivos
+          </label>
+          <input type="file" class="archivos" id="files" name="files" multiple>
         </div>
       </form>
     </div>
@@ -126,12 +133,12 @@
           </div>
           {% include "pages/Modals/EditarComentarioAnuncio.html" %}
           {% if layout.0 == "Alumno" and a.7 == layout.8 and proyectoDetails.0.8 == False %}
-          <div class="p-2 ms-auto comentarioConfig"><a href="" data-bs-toggle="modal" data-bs-target="#Comentario{{a.0}}" title="Editar"><i class="bi bi-pencil"></i></a> <a href="{% url 'eliminarComentario' a.0 codigo %}" title="Eliminar"><i class="bi bi-trash"></i></a></div>
+          <div class="p-2 ms-auto comentarioConfig"><a href="" data-bs-toggle="modal" data-bs-target="#Comentario{{a.0}}" title="Editar"><i class="bi bi-pencil"></i></a> <a href="" onclick="eliminar(event, this);" data-url="{% url 'eliminarComentario' a.0 codigo %}" class="Eliminar" title="Eliminar"><i class="bi bi-trash"></i></a></div>
           {% elif layout.0 == "Profesor" and proyectoDetails.0.8 == False %}
           <div class="p-2 ms-auto comentarioConfig"> 
             {% if a.8 == layout.8 %}
             <a href="" data-bs-toggle="modal" data-bs-target="#Comentario{{a.0}}" title="Editar"><i class="bi bi-pencil"></i></a>
-          {% endif %} <a href="{% url 'eliminarComentario' a.0 codigo %}" title="Eliminar"><i class="bi bi-trash"></i></a></div>{% endif %}
+          {% endif %} <a href="" onclick="eliminar(event, this);" data-url="{% url 'eliminarComentario' a.0 codigo %}"             class="Eliminar" title="Eliminar"><i class="bi bi-trash"></i></a></div>{% endif %}
         </div>
         
         <p class="texto">{{a.1}}</p>
@@ -144,5 +151,5 @@
     {% empty %} {% endfor %}
   </div>
 </div>
-
+<script src="{% static 'javascripts/Proyectos/ProyectoDetail.js' %}"></script>
 {% endblock %}

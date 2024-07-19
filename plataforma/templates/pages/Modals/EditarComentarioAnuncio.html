@@ -11,7 +11,7 @@
                 <form action="{% url 'editarComentario' a.0 codigo %}" method="post">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <textarea name="comentariopost" class="form-control" placeholder="Comenta..." required>{{a.1}}</textarea>
+                        <textarea name="comentariopost" class="form-control" rows="5" placeholder="Comenta..." required>{{a.1}}</textarea>
                     </div>
                     <button class="boton_unirse" type="submit"><i class="bi bi-floppy"></i> Guardar</button>
                 </form>

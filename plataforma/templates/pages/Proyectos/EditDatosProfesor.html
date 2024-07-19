@@ -10,46 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos del Profesor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <style>
-        .card-header h2 {
-            font-size: 1.5rem;
-            color: #6c757d;
-        }
-        .form-label {
-            font-weight: bold;
-            color: #495057;
-        }
-        .form-control {
-            background-color: #f8f9fa;
-            border: 1px solid #ced4da;
-        }
-        .img-preview {
+        .card-img-top {
             max-width: 100%;
+            max-height: 150px; /* Ajusta la altura máxima según tus necesidades */
+            width: auto;
             height: auto;
-        }
-        .img-caption {
-            font-size: 0.9rem;
-            color: #6c757d;
-            text-align: center;
-            margin-top: 5px;
-        }
-        .image-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            margin-right: 10px;
-        }
-        .image-caption {
-            flex: 1;
-            text-align: center;
-        }
-        .btn-primary, .btn-success {
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -57,7 +24,7 @@
     {% include "layouts/ClaseBase.html" %}
     <div class="container mt-5">
         <h1 class="mb-4">Datos del Profesor</h1>
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-header titulo">
                 <h2 style="color: white;">{{ profesor.nombre }} {{ profesor.apellidos }}</h2>
             </div>
@@ -84,18 +51,25 @@
                         <label for="imagen" class="form-label">Nueva Foto</label>
                         {{ form.imagen|attr:"class:form-control"|attr:"disabled:true" }}
                     </div>
-                    <div class="image-container">
-                        <div>
-                            <img id="imagenPreview" src="#" alt="Vista previa de la imagen" class="img-preview" style="display: none;"/>
-                            <div class="img-caption" id="imagenPreviewCaption" style="display: none;">Imagen Nueva</div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Imagen Actual</h5>
+                                    <img src="{{ profesor.imagen.url }}" class="card-img-top img-thumbnail rounded" alt="Imagen del profesor">
+                                </div>
+                            </div>
                         </div>
-                        {% if profesor.imagen %}
-                        <div>
-                            <img src="{{ profesor.imagen.url }}" class="img-fluid rounded img-preview" alt="Imagen del profesor">
-                            <div class="img-caption">Imagen Anterior</div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card" id="previewCard" style="display:none;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Imagen Nueva</h5>
+                                    <img id="imagenPreview" src="#" alt="Vista previa de la imagen" class="card-img-top img-thumbnail">
+                                </div>
+                            </div>
                         </div>
-                        {% endif %}
                     </div>
+                    
                     <div class="d-flex justify-content-end">
                         <button type="button" id="editButton" class="btn btn-primary">Editar</button>
                         <button type="submit" id="saveButton" class="btn btn-success" style="display:none;">Guardar</button>
@@ -114,14 +88,13 @@
             document.getElementById('editButton').style.display = 'none';
             document.getElementById('saveButton').style.display = 'inline-block';
         });
+
         document.getElementById('id_imagen').addEventListener('change', function(event) {
             var reader = new FileReader();
             reader.onload = function(){
                 var output = document.getElementById('imagenPreview');
-                var caption = document.getElementById('imagenPreviewCaption');
                 output.src = reader.result;
-                output.style.display = 'block';
-                caption.style.display = 'block';
+                document.getElementById('previewCard').style.display = 'block';
             };
             reader.readAsDataURL(event.target.files[0]);
         });
@@ -140,10 +113,7 @@
             });
         </script>
     {% endfor %}
-{% endif %}
-
-
-
+    {% endif %}
 
 </body>
 </html>
