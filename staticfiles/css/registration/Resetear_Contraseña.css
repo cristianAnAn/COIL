@@ -1,0 +1,19 @@
+.card {
+    margin-top: 50px; /* Ajusta la distancia desde arriba */
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.invalid-feedback {
+    display: none;
+
+}
+
+body{
+    background: #6a11cb;
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+}

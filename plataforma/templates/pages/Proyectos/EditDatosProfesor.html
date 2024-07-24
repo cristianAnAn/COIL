@@ -71,9 +71,11 @@
                     </div>
                     
                     <div class="d-flex justify-content-end">
-                        <button type="button" id="editButton" class="btn btn-primary">Editar</button>
-                        <button type="submit" id="saveButton" class="btn btn-success" style="display:none;">Guardar</button>
+                        <button type="button" id="editButton" class="btn btn-primary me-2">Editar</button>
+                        <button type="submit" id="saveButton" class="btn btn-success me-2" style="display:none;">Guardar</button>
+                        <button type="button" id="cancelButton" class="btn btn-danger" style="display:none;">Cancelar</button>
                     </div>
+                    
                 </form>
             </div>
         </div>
@@ -87,6 +89,17 @@
             });
             document.getElementById('editButton').style.display = 'none';
             document.getElementById('saveButton').style.display = 'inline-block';
+            document.getElementById('cancelButton').style.display = 'inline-block';
+        });
+
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            document.querySelectorAll('#profesorForm textarea, #profesorForm input').forEach(function(element) {
+                element.setAttribute('disabled', 'true');
+                element.classList.add('form-control');
+            });
+            document.getElementById('editButton').style.display = 'inline-block';
+            document.getElementById('saveButton').style.display = 'none';
+            document.getElementById('cancelButton').style.display = 'none';
         });
 
         document.getElementById('id_imagen').addEventListener('change', function(event) {

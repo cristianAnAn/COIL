@@ -8,44 +8,25 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="">
+                <form action="{% url 'AgregarMaterial' %}" method="post">
+                    {% csrf_token %}
                     <div class="mb-3">
-                        <label for="titulo" class="form-label">Título</label>
-                        <input type="text" id="titulo" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="para" class="form-label">Para</label>
-                        <select id="para" name="para" class="form-select">
-                            <option value="opcion1">Todos los alumnos</option>
-                            <option value="opcion2">Cristian Andres Cid Rodriguez</option>
-                            <option value="opcion3">Daniel Macedo Martinez</option>
-                            <option value="opcion4">Juan Mateo Hernandez De Luna</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tema" class="form-label">Tema</label>
-                        <input type="text" id="tema" name="tema" class="form-control">
+                        <label for="titulo" class="form-label">Tema</label>
+                        <input type="text" id="titulo" name="Tema" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción (opcional)</label>
                         <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="link" class="form-label">Link</label>
-                        <input type="text" id="link" name="link" class="form-control">
-                    </div>
-                    <div class="mb-3">
                         <label for="fase_publicacion_material" class="form-label">Fase donde se publicará</label>
-                        <select id="fase_publicacion_material" name="fase_publicacion_material" class="form-select">
+                        <select id="fase_publicacion_material" name="fase_publicacion_material" class="form-select" required>
                             {% for fase in fases %}
                                 <option value="{{ fase.0 }}">{{ fase.1 }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="adjunto" class="form-label">Adjuntar</label>
-                        <input type="file" id="adjunto" name="adjunto" class="form-control">
-                    </div>
+                    
                     <button type="submit" class="btn btn-primary boton">Guardar</button>
                 </form>
             </div>

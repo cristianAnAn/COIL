@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
+import os
 
 
 class Rol(models.Model):
@@ -52,6 +52,9 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):
         return self.is_admin
 
+
+
+
 class Catalogo(models.Model):
     nombre_universidad = models.CharField(max_length=200)
     pais = models.CharField(max_length=100)
@@ -92,10 +95,22 @@ class Profesor(models.Model):
     descripcion = models.TextField(null=True, blank=True)
     gustos_personales = models.TextField(null=True, blank=True)
     imagen = models.ImageField(upload_to='imagenes_profesores', null=True, blank=True)
+
     def __str__(self):
         return f"{self.nombre} {self.apellidos}"
-    
-    
+
+    def save(self, *args, **kwargs):
+        # Check if there is an existing image before saving a new one
+        try:
+            this = Profesor.objects.get(id=self.id)
+            if this.imagen != self.imagen:
+                if this.imagen:  # Check if an image exists
+                    if os.path.isfile(this.imagen.path):
+                        os.remove(this.imagen.path)
+        except Profesor.DoesNotExist:
+            pass  # This is a new object, no need to check for an old image
+
+        super(Profesor, self).save(*args, **kwargs)
     
 #*Cosas agregadas por Daniel
 class Proyectos(models.Model):
@@ -154,13 +169,20 @@ class Alumnos_proyecto(models.Model):
 
 #!Falta tareas, materiales y presentación profesor
 #*Cosas de Mateo
-
 class Materiales(models.Model):
-    tema = models.CharField(max_length=200)
     descripcion = models.TextField()
     fecha = models.DateField()
     id_fase = models.BigIntegerField()
+    titulo = models.CharField(max_length=100)
     id_profesor = models.IntegerField()
     
     def _str_(self):
         return self.titulo
+    
+class Materiales_Comentarios(models.Model):
+    comentario = models.TextField()
+    fecha = models.DateTimeField()
+    fecha_edit = models.DateTimeField()
+    id_profesor = models.ForeignKey(Profesor, null=True, on_delete=models.CASCADE)
+    id_alumno = models.ForeignKey(Alumno, null=True, on_delete=models.CASCADE)
+    id_material= models.ForeignKey(Materiales,on_delete=models.CASCADE)

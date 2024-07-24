@@ -16,7 +16,7 @@
     </li>
     {% for fase in fases %}
     <li class="nav-item">
-        <a class="nav-link {% if enlace_activo1 == fase.1 %}active{% endif %}" href="{% url 'Fase' codigo fase.1 %}">
+        <a class="nav-link {% if enlace_activo1 == fase.0 %}active{% endif %}" href="{% url 'Fase' codigo fase.0 %}">
             {{ fase.1 }}
         </a>
     </li>

@@ -90,7 +90,7 @@
     color: gray;
     text-decoration: none;
 }
-/*!negro*/
+/*!ocultar*/
 input[type="file"] {
     display: none;
 }
@@ -107,4 +107,27 @@ input[type="file"] {
 
 .custom-file-upload:hover {
     background-color: #077fd5;
+}
+.boton_modales{
+    font-size: 20px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #36A0ED;
+    color: #36A0ED;
+}
+.boton_modales:hover {
+    background-color: #36A0ED;
+    color: white;
+}
+
+/**Visualizar img*/
+.preview-item {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.preview-item img {
+    max-width: 100px;
+    margin-right: 10px;
 }

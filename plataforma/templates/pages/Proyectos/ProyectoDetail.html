@@ -1,6 +1,7 @@
 {% extends 'layouts/baseAdmin.html' %} {% load static %} {% block content %}
-
 <link rel="stylesheet" href="{% static 'css/Proyectos/ProyectoDetail.css' %}" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% include "pages/Modals/AgregarEnlaceAnuncio.html" %}
 {% include "layouts/ClaseBase.html" %}
 <div class="titulo">
   <h1>FORO</h1>
@@ -42,6 +43,7 @@
       <form
         action="{% url 'PublicarComentario' proyectoId codigo %}"
         method="post"
+        onsubmit="disableButtons()"
       >
         {% csrf_token %}
         <div class="input-group mb-1 input-group-lg">
@@ -50,7 +52,7 @@
             placeholder="Publica algo..."
             name="comentario"
           ></textarea>
-          <button class="boton_enviar" type="submit">
+          <button class="boton_enviar submitBtn" type="submit">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="40px"
@@ -64,13 +66,17 @@
             </svg>
           </button>
         </div>
-        <div class="mb-3">
-          <button type="button" class="boton_unirse"><i class="bi bi-link-45deg"></i> Enlaces</button>
+        <div class="mb-1">
+          <a type="button" class="boton_unirse" href="" data-bs-toggle="modal" data-bs-target="#Enlaces"><i class="bi bi-link-45deg"></i> Enlaces</a>
           <label for="files" class="custom-file-upload boton">
             <i class="bi bi-journals"></i> Archivos
           </label>
           <input type="file" class="archivos" id="files" name="files" multiple>
         </div>
+        <div class="container mb-3">
+          <ul id="enlacesList" class="list-group"></ul>
+        </div>
+        <div id="preview"></div>
       </form>
     </div>
     {% endif %} {% for anuncio in anuncios %}
@@ -86,12 +92,27 @@
           </div>
         </div>
       </div>
-      <p class="texto">{{anuncio.1}}</p>
+      <p class="texto">
+        {{anuncio.1}}
+      </p>
+      <p class="texto">
+      {% for e in enlaces %}
+        {% for enlace in e.1 %}
+        {% include "pages/Modals/EnlacesArchivosModal.html" %}
+        {% if enlace.4 == anuncio.0 %}
+          <button type="button" class="boton_modales" data-bs-toggle="modal" data-bs-target="#Enlaces{{ enlace.0 }}">
+            <i class="bi bi-link-45deg"></i> {{ enlace.1 }}
+          </button>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+      </p>
       {% if proyectoDetails.0.8 == False %}
       <div>
         <form
           action="{% url 'ComentarPublicacion' anuncio.0 codigo%}"
           method="post"
+          onsubmit="disableButtons()"
         >
           {% csrf_token %}
           <div class="input-group mb-3 input-group">
@@ -102,7 +123,7 @@
               name="comentar"
               required
             />
-            <button class="boton_enviar" type="submit">
+            <button class="boton_enviar submitBtn" type="submit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="40px"

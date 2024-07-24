@@ -29,7 +29,7 @@
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">¡Bienvenido {{ nombre_usuario }}!</h2>
                         <p class="text-center mb-4">Por favor, complete su registro.</p>
-                        <form method="post">
+                        <form method="post" onsubmit="disableButtons()">
                             {% csrf_token %}
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start">
-                                <button type="submit" class="btn btn-primary me-2">Enviar</button>
+                                <button type="submit" class="btn btn-primary me-2 submitBtn">Enviar</button>
                                 <a href="{% url 'logout' %}" class="btn btn-danger" id="cancelBtn">Cancelar</a>
                             </div>
                         </form>
@@ -119,6 +119,7 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'javascripts/General/desactivar.js' %}"></script>
 
     <!-- Incluir el modal -->
     {% include 'pages/Modals/AgregarUniversidad.html' %}

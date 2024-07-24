@@ -70,7 +70,7 @@
         {% csrf_token %}
         <div class="input-group mb-3">
             <span class="input-group-text">Enlace de zoom</span>
-            <input type="text" placeholder="Coloca el enlace completo: https://us06web.zoom.us/j/89173814050?pwd=IUF6PYV64C6rvM2a0B9gTTC0FaDRyI.1" class="form-control" value="{{proyectoDetails.0.10}}" name="zoom" {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+            <input type="text" placeholder="Coloca el enlace completo" class="form-control" value="{{proyectoDetails.0.10}}" name="zoom" {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
         </div>
     
     {% if usuario_id == proyectoDetails.0.11 %}
@@ -93,8 +93,7 @@
         const fechaFinInput = document.getElementById('fecha_fin');
 
         // Establece la fecha mínima para la fecha de inicio como la fecha actual
-        const today = new Date().toISOString().split('T')[0];
-        fechaInicioInput.min = today;
+        
 
         fechaInicioInput.addEventListener('change', function() {
             const fechaInicio = new Date(this.value);

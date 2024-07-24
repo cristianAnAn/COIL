@@ -114,7 +114,7 @@ class RegistroProfesorForm(forms.ModelForm):
         return idmex_dni
 
 
-class ProfesorForm(forms.ModelForm):
+class RegisterProfesorForm(forms.ModelForm):
     class Meta:
         model = Profesor
         fields = ['trayectoria_academica', 'trayectoria_profesional', 'descripcion', 'gustos_personales', 'imagen']
@@ -123,9 +123,21 @@ class ProfesorForm(forms.ModelForm):
             'trayectoria_profesional': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
             'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
             'gustos_personales': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
-            'imagen': forms.FileInput(attrs={'class': 'form-control'})
+            'imagen': forms.FileInput(attrs={'class': 'form-control', 'required': True})
         }
 
+
+class UpdateProfesorForm(forms.ModelForm):
+    class Meta:
+        model = Profesor
+        fields = ['trayectoria_academica', 'trayectoria_profesional', 'descripcion', 'gustos_personales', 'imagen']
+        widgets = {
+            'trayectoria_academica': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
+            'trayectoria_profesional': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
+            'gustos_personales': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'required': True}),
+            'imagen': forms.FileInput(attrs={'class': 'form-control', 'required': False})
+        }
 
 
 

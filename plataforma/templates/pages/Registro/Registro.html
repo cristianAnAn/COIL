@@ -28,7 +28,7 @@
     <div class="card">
         <div class="card-body">
             <h2 class="card-title text-center mb-4">Registro de Usuario</h2>
-            <form id="registroForm" method="post">
+            <form id="registroForm" method="post"  onsubmit="disableButtons()">
                 {% csrf_token %}
                 <div class="mb-3">
                     {{ form.nombre_usuario.label_tag }}
@@ -75,13 +75,15 @@
                     {{ form.rol }}
                 </div>
                 <div class="mb-3 d-flex justify-content-start">
-                    <button type="submit" class="btn btn-primary me-2">Registrar</button>
+                    <button type="submit" class="btn btn-primary me-2  submitBtn">Registrar</button>
                     <a href="{% url 'Login' %}" class="btn btn-danger" id="cancelBtn">Cancelar</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script src="{% static 'javascripts/General/desactivar.js' %}"></script>
 {% if messages %}
     {% for m in messages %}
         <script>
@@ -90,7 +92,7 @@
                 text: "{{ m }}",
                 icon: 'success',
                 showConfirmButton: false,
-                timer: 10000, // Redirigir después de 10 segundos
+                timer: 5000, // Redirigir después de 5 segundos
                 allowOutsideClick: true, // Permitir clics fuera del SweetAlert
             }).then((result) => {
                 // Redirigir cuando el SweetAlert se cierre

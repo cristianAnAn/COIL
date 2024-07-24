@@ -16,7 +16,9 @@ urlpatterns = [
     path('ConfiguracionProyecto/<str:codigo>',views.ConfiguracionProyecto, name="ConfiguracionProyecto"),
     path('SeguimientoActividad/<str:codigo>',views.SeguimientoActividad,name='SeguimientoActividad'),
     path('ViAlActividades/',views.ViAlActividades,name="ViAlActividades"),
-    path('ViAlMateriales/',views.ViAlMateriales,name="ViAlMateriales"),
+    path('ViAlMateriales/<int:material>', views.ViAlMateriales, name='ViAlMateriales'),
+    path('AgregarMaterial/', views.AgregarMaterial, name='AgregarMaterial'),
+    path('MaterialComentarios/<int:id_material>', views.MaterialComentarios, name='MaterialComentarios'),
     
     
     path('Registro/', views.Registro, name='Registro'),
@@ -45,7 +47,7 @@ urlpatterns = [
     path('Validatecredentials/', views.validate_credentials, name='validate_credentials'),
     path('Checkusername/', views.check_username, name='check_username'),
     path('fasesCoil/<str:codigo>',views.indexFases,name="FasesCoil"),
-    path('fasesCoil/<str:codigo>/<str:nombre>',views.Fase1,name="Fase"),
+    path('fasesCoil/<str:codigo>/<int:idFase>',views.Fase1,name="Fase"),
 
     path('error/<str:error>',views.Error,name="Error"),
     path('Proyecto/<str:codigo>',views.UnirteProyectoPage, name="EntrarProyecto"),

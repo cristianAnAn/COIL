@@ -1,0 +1,27 @@
+<!-- Modal para enlaces -->
+<div class="modal fade" id="Enlaces{{ enlace.0 }}" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="joinClassModalLabel">Enlace: {{ enlace.1 }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center mt-1 mb-1">
+                {% if enlace.5 == "www.youtube.com" %}
+                    <iframe width="560" height="315" src="{{ enlace.2 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                {% elif enlace.5 == "youtu.be" %}
+                    <iframe width="560" height="315" src="{{ enlace.2 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                {% elif enlace.5 == "view.genially.com" %}
+                    <iframe src="{{ enlace.2 }}" style="width:100%; height:500px;"></iframe>
+                {% else %}
+                    <p>Puede haber problemas para visualizar el contenido</p>
+                    <iframe src="{{ enlace.2 }}" style="width:100%; height:500px;"></iframe>
+                {% endif %}
+                <p class="mt-2"><a href="{{ enlace.2 }}" class="boton_unirse"><i class="bi bi-box-arrow-up-right"></i> Abrir enlace</a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

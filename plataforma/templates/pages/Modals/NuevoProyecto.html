@@ -15,7 +15,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="{% url 'crearProyecto' %}" method="post" class="was-validated">
+                <form action="{% url 'crearProyecto' %}" onsubmit="disableButtons()" method="post" class="was-validated">
                     {% csrf_token %}
                     <div class="mb-3 mt-3">
                         <label for="uname" class="form-label">Nombre del proyecto:</label>
@@ -70,7 +70,7 @@
                             <option value="verde">Verde</option>
                         </select>
                     </div>
-                    <button class="btn btn-primary">Crear</button>
+                    <button class="btn btn-primary submitBtn">Crear</button>
                 </form>
             </div>
 

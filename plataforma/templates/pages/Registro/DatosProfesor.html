@@ -21,7 +21,7 @@
             <h4>Te invitamos a compartir con tus alumnos más acerca de ti</h4>
         </div>
         <div class="card-body">
-            <form id="profesorForm" method="post" enctype="multipart/form-data">
+            <form id="profesorForm" onsubmit="disableButtons()" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="trayectoria_academica">Trayectoria Académica</label>
@@ -49,14 +49,14 @@
                     </div>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+                    <button type="submit" class="btn btn-primary btn-lg submitBtn">Guardar</button>
                     <a href="{% url 'logout' %}" class="btn btn-danger btn-lg">Cancelar</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<script src="{% static 'javascripts/General/desactivar.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -93,28 +93,41 @@ crossorigin="anonymous"></script>
                         setTimeout(() => {
                             window.location.href = "{% url 'ListaProyectos' %}";
                         }, 5000);
+                    } else {
+                        var errors = response.errors;
+                        var errorMessages = '';
+                        for (var field in errors) {
+                            if (errors.hasOwnProperty(field)) {
+                                errors[field].forEach(function(error){
+                                    errorMessages += '<p>' + error + '</p>';
+                                });
+                            }
+                        }
+                        Swal.fire({
+                            title: 'Error',
+                            html: errorMessages,
+                            icon: 'error',
+                        });
                     }
+                },
+                error: function(xhr, status, error){
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Hubo un problema con el servidor. Inténtalo de nuevo más tarde.',
+                        icon: 'error',
+                    });
                 }
             });
         });
 
-               // Mostrar el card de imagen solo si se selecciona una imagen
-               $('#id_imagen').on('change', function(event) {
-                var reader = new FileReader();
-                reader.onload = function(){
-                    var output = document.getElementById('imagenPreview');
-                    output.src = reader.result;
-                    $('#imagenCard').show(); // Mostrar el card de imagen
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            });
-    
-            // Ocultar el card de imagen si se elimina la imagen
-            $('#id_imagen_clear_id').on('click', function(event) {
-                $('#imagenCard').hide(); // Ocultar el card de imagen
-            });
-
-        
+        $('input[type="file"]').on('change', function(){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#imagenPreview').attr('src', e.target.result);
+                $('#imagenCard').show();
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
     });
 </script>
 

@@ -25,6 +25,7 @@
     background-color: #36A0ED;
     padding: 5px 15px 5px 15px;
     border: 0px;
+    text-decoration: none;
 }
 .boton_unirse:hover{
     background-color: #077fd5;
@@ -72,5 +73,61 @@
     background-color: #077fd5;
 }
 .texto{
-    font-size: 25px;
+    font-size: 20px;
+    text-align: justify;
+}
+.tarjetaComentarios{
+    border-radius: 10px;
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 50px;
+    padding-bottom: 1px;
+    padding-right: 10px;
+    background-color: rgb(222, 222, 222);
+}
+.comentarioConfig{
+    font-size: 20px;
+    color: gray;
+    text-decoration: none;
+}
+/*!ocultar*/
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #36A0ED;
+    padding: 5px 15px 5px 15px;
+    border: 0px;
+    text-decoration: none;
+}
+
+.custom-file-upload:hover {
+    background-color: #077fd5;
+}
+.boton_modales{
+    font-size: 20px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #36A0ED;
+    color: #36A0ED;
+}
+.boton_modales:hover {
+    background-color: #36A0ED;
+    color: white;
+}
+
+/**Visualizar img*/
+.preview-item {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.preview-item img {
+    max-width: 100px;
+    margin-right: 10px;
 }
