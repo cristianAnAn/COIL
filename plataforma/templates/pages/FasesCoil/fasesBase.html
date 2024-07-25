@@ -1,9 +1,11 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/FasesCoil/fasesBase.css' %}">
-<link rel="stylesheet" href="{% static 'vendor/bootstrap-5.3.3-dist/css/bootstrap.min.css' %}">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
 {% include "layouts/ClaseBase.html" %}
 {% include "pages/Modals/CrearActividad.html" %}
 {% include "pages/Modals/CrearMaterial.html" %}
+<script src="{% static 'javascripts/Actividades/fasesBase.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-5.3.3-dist/css/bootstrap.min.css' %}">
 <h1 class="titulo">FASES COIL</h1>
 <ul class="nav nav-pills justify-content-center">
     <li class="nav-item">
@@ -31,5 +33,4 @@
         </ul>
     </li>
     {% endif %}
-    <script src="{% static 'vendor/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js' %}"></script>
 </ul>
