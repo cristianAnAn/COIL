@@ -25,11 +25,11 @@
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Fecha de inicio</span>
-            <input type="date" class="form-control" value="{{fecha_inicio}}" name="fecha_inicio" id="fecha_inicio" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+            <input type="date" class="form-control fecha-inicio" value="{{fecha_inicio}}" name="fecha_inicio" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Fecha de fin</span>
-            <input type="date" class="form-control" value="{{fecha_fin}}" name="fecha_fin" id="fecha_fin" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
+            <input type="date" class="form-control fecha-fin" value="{{fecha_fin}}" name="fecha_fin" required {% if proyectoDetails.0.8 == True %} disabled {% endif %}>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Ciclo escolar</span>
@@ -87,41 +87,4 @@
 </div>
 <script src="{% static 'javascripts/Proyectos/ConfigurarProyectoCopiar.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const fechaInicioInput = document.getElementById('fecha_inicio');
-        const fechaFinInput = document.getElementById('fecha_fin');
-
-        // Establece la fecha mínima para la fecha de inicio como la fecha actual
-        
-
-        fechaInicioInput.addEventListener('change', function() {
-            const fechaInicio = new Date(this.value);
-            
-            // Bloquea las fechas anteriores a la fecha de inicio en el campo de fecha de fin
-            fechaFinInput.min = this.value;
-            
-            // Si la fecha de fin es anterior a la fecha de inicio, resetea el campo de fecha de fin
-            if (new Date(fechaFinInput.value) < fechaInicio) {
-                fechaFinInput.value = this.value;
-            }
-        });
-
-        fechaFinInput.addEventListener('change', function() {
-            const fechaFin = new Date(this.value);
-            const fechaInicio = new Date(fechaInicioInput.value);
-
-
-            // Si la fecha de fin es igual a la fecha de inicio, muestra una alerta y resetea el campo
-            if (fechaFin.getTime() === fechaInicio.getTime()) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Fecha inválida',
-                    text: 'La fecha de inicio no puede ser igual a la fecha de fin'
-                });
-                this.value = '';
-            }
-        });
-    });
-</script>
 {% endblock %}

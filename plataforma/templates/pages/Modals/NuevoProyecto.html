@@ -1,6 +1,6 @@
 {% load static %}
 
-<script src="{% static 'javascripts/Modals/NuevoProyecto.js' %}"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="modal" id="nuevoProyecto">
@@ -37,13 +37,13 @@
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="uname" class="form-label">Fecha de inicio del proyecto:</label>
-                        <input type="date" class="form-control" name="fecha_inicio" required>
+                        <input type="date" class="form-control fecha-inicio1" name="fecha_inicio" required>
                         <div class="valid-feedback"><span class="material-symbols-outlined">check_circle</span></div>
                         <div class="invalid-feedback">Dato requerido.</div>
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="uname" class="form-label">Fecha de fin del proyecto:</label>
-                        <input type="date" class="form-control" name="fecha_fin" required>
+                        <input type="date" class="form-control fecha-fin1" name="fecha_fin" required>
                         <div class="valid-feedback"><span class="material-symbols-outlined">check_circle</span></div>
                         <div class="invalid-feedback">Dato requerido.</div>
                     </div>
@@ -82,6 +82,6 @@
         </div>
     </div>
 </div>
-
+<script src="{% static 'javascripts/Modals/NuevoProyecto.js' %}"></script>
 
 
