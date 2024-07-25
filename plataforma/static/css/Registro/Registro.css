@@ -14,4 +14,10 @@ body{
     background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 }
-
+        /* Estilos adicionales personalizados */
+.is-valid {
+    border-color: #28a745; /* Borde verde */
+}
+.is-invalid {
+    border-color: #dc3545; /* Borde rojo */
+}

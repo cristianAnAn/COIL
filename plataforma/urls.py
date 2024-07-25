@@ -59,6 +59,7 @@ urlpatterns = [
     path('CrearAnucio/<int:proyecto>/<str:codigo>',views.PublicarComentario,name="PublicarComentario"),
     path('ComentarAnucio/<int:publicacion>/<str:codigo>',views.ComentarPublicacion,name="ComentarPublicacion"),
     path('EliminarComentarioAnucio/<int:id_coment>/<str:codigo>',views.eliminarComentario,name="eliminarComentario"),
+    path('EliminarAnucio/<int:id_anuncio>/<str:codigo>',views.eliminarAnuncio,name="eliminarAnuncio"),
     path('EditarComentarioAnucio/<int:id_coment>/<str:codigo>',views.editarComentario,name="editarComentario")
     # path('articulos/',views.articulos,name="articulos"),
     # path('articulo/',views.arcticulo,name="articulo"),

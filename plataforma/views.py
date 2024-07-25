@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
 from django.contrib.auth.decorators import login_required
-from .models import Usuario, Catalogo, Alumno, Profesor, Rol
+from .models import Usuario, Catalogo, Alumno, Profesor, Rol, Anuncios_archivos
 import json
 from django.contrib  import messages
 from datetime import datetime
@@ -505,6 +505,12 @@ def ProyectoDetail(request, codigo):
             proyectoId = cursor.fetchone()[0]
             cursor.callproc('obtener_anuncios', [proyectoId])
             anuncios = cursor.fetchall()
+            archivos_dict = {}
+            for anuncio in anuncios:
+                cursor.callproc('verArchivosAnuncio', [anuncio[0]])
+                archivos = cursor.fetchall()
+                archivos_dict[anuncio[0]] = archivos
+            archivos_list = [(anuncio_id, archivos) for anuncio_id, archivos in archivos_dict.items()]
             enlaces_dict = {}
             for anuncio in anuncios:
                 cursor.callproc('verEnlacesAnuncios', [anuncio[0]])
@@ -526,7 +532,8 @@ def ProyectoDetail(request, codigo):
                 'proyectoId': proyectoId,
                 'anuncios': anuncios,
                 'comentarios': comentarios_list,
-                'enlaces': enlaces_list})
+                'enlaces': enlaces_list,
+                'archivos':archivos_list})
     else:
         return redirect('Error', comprobacion)
 
@@ -1094,7 +1101,26 @@ def PublicarComentario(request, proyecto, codigo):
                     proyecto
                 ])
                 anucio_id = cursor.fetchone()[0]
-                if anucio_id != 'Error no se publico el anuncio':
+                if anucio_id != 'Error no se publico el anuncio' :
+                    if titulos:
+                        for titulo, path in combinados:
+                            cursor.callproc('enlacesAnuncio', [
+                                str(titulo),
+                                str(path),
+                                anucio_id
+                            ])
+                    if request.method == 'POST':
+                        if 'files' in request.FILES:
+                            files = request.FILES.getlist('files')
+                            for uploaded_file in files:
+                                # Guardar cada archivo en el modelo
+                                anuncio_archivo = Anuncios_archivos(
+                                    path=uploaded_file,
+                                    fecha=datetime.now().date(),
+                                    id_anuncio_id=anucio_id
+                                )
+                                anuncio_archivo.save()
+                            print('Archivo subido correctamente')
                     return redirect('ProyectoDetail', codigo)
                 else:
                     return redirect('Error', anucio_id)
@@ -1108,18 +1134,29 @@ def PublicarComentario(request, proyecto, codigo):
                     proyecto
                 ])
                 anucio_id = cursor.fetchone()[0]
-                if anucio_id != 'Error no se publico el anuncio' and not titulos:
+                if anucio_id != 'Error no se publico el anuncio' :
+                    if titulos:
+                        for titulo, path in combinados:
+                            cursor.callproc('enlacesAnuncio', [
+                                str(titulo),
+                                str(path),
+                                anucio_id
+                            ])
+                    if request.method == 'POST':
+                        if 'files' in request.FILES:
+                            files = request.FILES.getlist('files')
+                            for uploaded_file in files:
+                                # Guardar cada archivo en el modelo
+                                anuncio_archivo = Anuncios_archivos(
+                                    path=uploaded_file,
+                                    fecha=datetime.now().date(),
+                                    id_anuncio_id=anucio_id
+                                )
+                                anuncio_archivo.save()
+                            print('Archivo subido correctamente')
                     return redirect('ProyectoDetail', codigo)
-                elif anucio_id == 'Error no se publico el anuncio':
-                    return redirect('Error', anucio_id)
                 else:
-                    for titulo, path in combinados:
-                        cursor.callproc('enlacesAnuncio', [
-                            str(titulo),
-                            str(path),
-                            anucio_id
-                        ])
-                    return redirect('ProyectoDetail', codigo)
+                    return redirect('Error', anucio_id)
         else:
             return redirect('Error', 'Datos no válidos')
     except (Alumno.DoesNotExist, Profesor.DoesNotExist):
@@ -1311,5 +1348,36 @@ def MaterialComentarios(request, id_material):
                 return redirect('Error', resultado)
         else:
             return redirect('Error', 'Datos no válidos')
+    except (Alumno.DoesNotExist, Profesor.DoesNotExist):
+        return redirect('logout')
+    
+@login_required(login_url='Login')
+def eliminarAnuncio(request,id_anuncio, codigo):
+    usuario = request.user
+    tipo_usuario = usuario.rol.nombre
+    try:
+        if tipo_usuario == 'Alumno':
+            alumno = Alumno.objects.get(id_usuario_id=usuario.id)
+            id_alumno = alumno.id
+            with connection.cursor() as cursor:
+                cursor.callproc('BuscarAlumnoComentariobyID', [id_anuncio])
+                r = cursor.fetchone()[0]
+                if id_alumno == r:
+                    cursor.callproc('EliminarAnuncio', [id_anuncio])
+                    resultado = cursor.fetchone()[0]
+                    if resultado == 'Eliminado exitosamente':
+                        return redirect('ProyectoDetail', codigo)
+                    else:
+                        return redirect('Error', resultado)
+                else:
+                    return redirect('Error', 'Tu usuario no coincide con el comentario')
+        elif tipo_usuario == 'Profesor':
+            with connection.cursor() as cursor:
+                cursor.callproc('EliminarAnuncio', [id_anuncio])
+                resultado = cursor.fetchone()[0]
+                if resultado == 'Eliminado exitosamente':
+                    return redirect('ProyectoDetail', codigo)
+                else:
+                    return redirect('Error', resultado)
     except (Alumno.DoesNotExist, Profesor.DoesNotExist):
         return redirect('logout')

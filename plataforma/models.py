@@ -135,7 +135,7 @@ class Anuncios(models.Model):
     id_proyecto = models.ForeignKey(Proyectos, on_delete=models.CASCADE)
 
 class Anuncios_archivos(models.Model):
-    path = models.TextField()
+    path = models.FileField(upload_to='archivos_foro', null=True, blank=True)
     fecha = models.DateField()
     id_anuncio= models.ForeignKey(Anuncios,on_delete=models.CASCADE)
 
@@ -173,7 +173,7 @@ class Materiales(models.Model):
     descripcion = models.TextField()
     fecha = models.DateField()
     id_fase = models.BigIntegerField()
-    titulo = models.CharField(max_length=100)
+    tema = models.CharField(max_length=100)
     id_profesor = models.IntegerField()
     
     def _str_(self):
@@ -186,3 +186,9 @@ class Materiales_Comentarios(models.Model):
     id_profesor = models.ForeignKey(Profesor, null=True, on_delete=models.CASCADE)
     id_alumno = models.ForeignKey(Alumno, null=True, on_delete=models.CASCADE)
     id_material= models.ForeignKey(Materiales,on_delete=models.CASCADE)
+
+class Materiales_enlaces(models.Model):
+    titulo = models.TextField()
+    path = models.TextField()
+    fecha = models.DateField()
+    id_anuncio= models.ForeignKey(Materiales,on_delete=models.CASCADE)

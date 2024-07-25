@@ -79,38 +79,71 @@ function disableButtons() {
 
 
 //*Mostrar archivos
+const addedFiles = [];
+
 document.getElementById('files').addEventListener('change', function(event) {
     const files = event.target.files;
     const preview = document.getElementById('preview');
-    preview.innerHTML = '';
 
-    Array.from(files).forEach((file, index) => {
+    Array.from(files).forEach((file) => {
+        if (!addedFiles.includes(file)) {
+            addedFiles.push(file);
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const div = document.createElement('div');
+                div.classList.add('preview-item');
+                div.innerHTML = `
+                    <embed src="${e.target.result}" alt="${file.name}" style="width:10%; height:50px;">
+                    <span>${file.name}</span>
+                    <button class="btn btn-danger ms-2 me-2" onclick="removeFile(event, ${addedFiles.length - 1})">Eliminar</button>
+                `;
+                preview.appendChild(div);
+            };
+            reader.onerror = function() {
+                console.error("Error al leer el archivo", file.name);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    updateInputFiles();
+});
+
+function removeFile(event, index) {
+    event.preventDefault(); // Evita el comportamiento por defecto del botón
+
+    addedFiles.splice(index, 1); // Elimina el archivo de la lista de archivos agregados
+
+    // Actualiza la vista previa
+    const preview = document.getElementById('preview');
+    preview.innerHTML = '';
+    addedFiles.forEach((file, index) => {
         const reader = new FileReader();
         reader.onload = function(e) {
             const div = document.createElement('div');
             div.classList.add('preview-item');
             div.innerHTML = `
-                <img src="${e.target.result}" alt="${file.name}">
+                <embed src="${e.target.result}" alt="${file.name}" style="width:10%; height:50px;">
                 <span>${file.name}</span>
-                <button class="btn btn-danger" onclick="removeFile(${index})">Eliminar</button>
+                <button class="btn btn-danger ms-2 me-2" onclick="removeFile(event, ${index})">Eliminar</button>
             `;
             preview.appendChild(div);
         };
         reader.readAsDataURL(file);
     });
-});
 
-function removeFile(index) {
+    updateInputFiles();
+}
+
+function updateInputFiles() {
     const input = document.getElementById('files');
     const dataTransfer = new DataTransfer();
-    const files = Array.from(input.files);
 
-    files.splice(index, 1);
-
-    files.forEach(file => {
+    addedFiles.forEach(file => {
         dataTransfer.items.add(file);
     });
 
     input.files = dataTransfer.files;
-    document.getElementById('files').dispatchEvent(new Event('change'));
 }
+
