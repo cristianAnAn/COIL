@@ -1,0 +1,38 @@
+<!-- Modal para enlaces -->
+{% load static %}
+<div class="modal fade" id="Invitar" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="joinClassModalLabel">Invita a mas personas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center mt-1 mb-1">
+                <form id="enviarCorreos" action="">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="urlEnlace">Correo:</label>
+                        <input type="email" class="form-control correo2" id="correo2" placeholder="ejemplo@email.com"
+                            required>
+                        <button type="submit" class="btn btn-dark"><i class="bi bi-plus-lg"></i></button>
+                    </div>
+                </form>
+                <form action="{% url 'invitarProyecto' codigo%}" method="post" onsubmit="disableButtons()">
+                    {% csrf_token %}
+                    <div class="texto">Correos a invitar</div>
+                    <div class="container mb-3">
+                        <ul id="CorreosList" class="list-group"></ul>
+                    </div>
+                    <button class="btn btn-primary submitBtn" type="submit"><i class="bi bi-envelope-paper-heart"></i>
+                        Invitar</button>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'javascripts/Modals/InvitarPersonas.js' %}"></script>
+<script src="{% static 'javascripts/General/desactivar.js' %}"></script>

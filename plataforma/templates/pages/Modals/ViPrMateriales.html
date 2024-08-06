@@ -1,0 +1,26 @@
+<!-- Modal para unirse a una clase -->
+<html>
+<div class="modal fade" id="Comentario{{comenspriv.0}}" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="joinClassModalLabel">Responde a {{comenspriv.4}} {{comenspriv.5}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center mt-1 mb-1">
+                <form action="{% url 'comentarioPrivMaterial' material.0 comenspriv.7 %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="5" name="comentPriv" placeholder="Comenta..." required></textarea>
+                    </div>
+                    <button class="btn-primary btn" type="submit"><i class="bi bi-floppy"></i> Guardar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

@@ -11,9 +11,9 @@
                 {% if archivo.5 == "pdf" %}
                     <embed src="{% get_media_prefix %}{{ archivo.2 }}" type="application/pdf" style="width:100%; height:500px;">
                 {% elif archivo.5 == "pptx" or archivo.5 == "docx" %}
-                    <iframe src="https://view.officeapps.live.com/op/view.aspx?src='{% get_media_prefix %}{{ archivo.2 }}'" style="width:100%; height:500px;"></iframe>
+                    <iframe src="https://view.officeapps.live.com/op/view.aspx?src='{{ host }}{% get_media_prefix %}{{ archivo.2 }}'" style="width:100%; height:500px;"></iframe>
                 {% elif archivo.5 == "png" or archivo.5 == "jpeg" or archivo.5 == "jpg" or archivo.5 == "gif" or archivo.5 == "apng" or archivo.5 == "ico" or archivo.5 == "cur" or archivo.5 == "jfif" or archivo.5 == "pjpeg" or archivo.5 == "pjp" or archivo.5 == "svg" %}
-                    <img src="{% get_media_prefix %}{{ archivo.2 }}" alt="{{ archivo.1 }}" style="width:100%; height:500px;">
+                    <img src="{% get_media_prefix %}{{ archivo.2 }}" alt="{{ archivo.1 }}" style="width:100%; ">
                 {% else %}
                     <p>Puede haber problemas para visualizar el contenido</p>
                     <embed src="{% get_media_prefix %}{{ archivo.2 }}" style="width:100%; height:500px;">

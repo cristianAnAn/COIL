@@ -74,8 +74,8 @@
         </div>
     
     {% if usuario_id == proyectoDetails.0.11 %}
-    <button class="botonDelete" data-bs-toggle="modal" data-bs-target="#eliminarClase"><i class="bi bi-trash"></i>
-        Borrar proyecto</button>
+    {% comment %}<button class="botonDelete" data-bs-toggle="modal" data-bs-target="#eliminarClase"><i class="bi bi-trash"></i>
+        Borrar proyecto</button>{% endcomment %}
     {% endif %}
     <button class="boton" type="submit" {% if proyectoDetails.0.8 == True %} disabled {% endif %}><i class="bi bi-floppy"></i> Guardar</button>
     {% if proyectoDetails.0.8 == False %}

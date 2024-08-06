@@ -4,16 +4,31 @@
 <link rel="stylesheet" href="{% static 'css/Proyectos/ProyectoDetail.css' %}">
 
 {% include "layouts/ClaseBase.html" %}
-
+{% include "pages/Modals/InvitarPersonas.html" %}
 <div class="container">
     <header>
         <h1 class="titulo">COMPAÑEROS</h1>
     </header>
+    {% if layout.0 == "Profesor" and proyectoDetails.0.8 == False %}
+    <div class="mt-2 text-center" >
+        <a type="button" class="boton_unirse" href="" data-bs-toggle="modal" data-bs-target="#Invitar"><i class="bi bi-envelope-paper-heart"></i> Invitar</a>
+    </div>
+    {% endif %}
     <section class="profesor">
         <h2>Profesor</h2>
         <hr>
         {% for profesor in profesores %}
-        <p>{{profesor.0}} {{profesor.1}}</p>
+        <div class="d-flex justify-content-between">
+            {{profesor.0}} {{profesor.1}}
+            {% if layout.0 == "Profesor" and proyectoDetails.0.8 == False and profesor.2 != proyectoDetails.0.11 %}
+            <div>
+                {% if layout.8 == proyectoDetails.0.11 %}
+                <h3><a title="Nombrarlo como administrador del proyecto" class="ml-auto" onclick="eliminar(event, this);" data-url="{% url 'adminProyecto' profesor.2 codigo %}"><i class="bi bi-person-fill-up"></i></a>
+                {% endif %}
+                <a title="Expulsar" class="ml-auto" onclick="eliminar(event, this);" data-url="{% url 'expulsarProfesor' profesor.2 codigo %}"><i class="bi bi-person-x"></i></a></h3>
+            </div>
+            {% endif %}
+        </div>
         {% endfor %}
     </section>
     <section class="alumnos">
@@ -21,9 +36,15 @@
         <hr>
         <ul>
             {% for alumno in alumnos %}
-            <li>{{alumno.0}} {{alumno.1}}</li>
+            <li class="d-flex justify-content-between">
+                {{alumno.0}} {{alumno.1}}
+                {% if layout.0 == "Profesor" and proyectoDetails.0.8 == False %}
+                <h3><a title="Expulsar" class="ml-auto" onclick="eliminar(event, this);" data-url="{% url 'expulsarAlumno' alumno.2 codigo %}"><i class="bi bi-person-x"></i></a></h3>
+                {% endif %}
+            </li>
             {% endfor %}
         </ul>
     </section>
 </div>
+<script src="{% static 'javascripts/Proyectos/ListaAlumnosProfesores.js' %}"></script>
 {% endblock %}

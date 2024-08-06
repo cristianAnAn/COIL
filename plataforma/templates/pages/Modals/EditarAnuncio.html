@@ -1,0 +1,61 @@
+<!-- Modal editar anuncio -->
+{% load static %}
+<div class="modal fade" id="Anuncio{{anuncio.0}}" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="joinClassModalLabel">Editar publicacion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center mt-1 mb-1">
+                <form action="{% url 'editarPost' anuncio.0 codigo %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <textarea name="editPost" class="form-control" rows="5" placeholder="Comenta..." required>{{anuncio.1}}</textarea>
+                    </div>
+                    
+                    {% comment %} <div class="container mb-3">
+                        <ul id="newEnlacesListEdit" class="list-group"></ul>
+                    </div>
+                    <div style="text-align: left;">
+                    <div class="container mb-3">
+                        <p>Enlaces</p>
+                        <ul id="enlacesListEdit" class="list-group">
+                        {% for links in enlaces %}
+                        {% for link in links.1 %}
+                        {% if link.4 == anuncio.0 %}
+                        {% endif %}
+                        <span>
+                            <strong>{{ link.1 }}</strong> <a href="{{ link.2 }}" target="_blank">{{ link.2 }}</a>
+                            <button class="btn btn-sm btn-warning edit-btn" data-id="{{ link.0 }}" data-title="{{ link.1 }}" data-link="{{ link.2 }}">Editar</button>
+                            <button class="btn btn-sm btn-danger delete-btn delete-link" data-id="{{ link.0 }}">Eliminar</button>
+                        </span>
+                        {% endfor %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    <div id="archivosPost">
+                        <p>Archivos</p>
+                        {% for documentos in archivos %}
+                        {% for docs in documentos.1 %}
+                        {% if docs.4 == anuncio.0 %}
+                        <p>
+                            <embed src="{% get_media_prefix %}{{ docs.2 }}" alt="{{ docs.1 }}" style="width:10%; height:50px;">
+                                <span>{{ docs.1 }}</span>
+                                <button class="btn btn-danger ms-2 me-2" data-title="{{ docs.1 }}">Eliminar</button>
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </div> {% endcomment %}
+                {% comment %} </div> {% endcomment %}
+                    <button class="boton_unirse" type="submit"><i class="bi bi-floppy"></i> Guardar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% comment %} <script src="{% static 'javascripts/Modals/EditarAnucio.js' %}"></script> {% endcomment %}

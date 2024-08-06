@@ -15,12 +15,18 @@ urlpatterns = [
     path('ListaActividadesPorFases/', views.ListaActividadesPorFases, name="ListaActividadesPorFases"),
     path('ConfiguracionProyecto/<str:codigo>',views.ConfiguracionProyecto, name="ConfiguracionProyecto"),
     path('SeguimientoActividad/<str:codigo>',views.SeguimientoActividad,name='SeguimientoActividad'),
-    path('ViAlActividades/',views.ViAlActividades,name="ViAlActividades"),
-    path('ViAlMateriales/<int:material>', views.ViAlMateriales, name='ViAlMateriales'),
+    path('ViAlMateriales/<int:material_id>/', views.ViAlMateriales, name='ViAlMateriales'),
     path('AgregarMaterial/', views.AgregarMaterial, name='AgregarMaterial'),
     path('MaterialComentarios/<int:id_material>', views.MaterialComentarios, name='MaterialComentarios'),
-    
-    
+    path('comentarioPrivMaterial/<int:id_material>/<int:id_alumno>',views.comentarioPrivMaterial,name="comentarioPrivMaterial"),
+
+        #APARTADO DE ACTIVIDADES
+    path('ViAlActividades/<int:actividad_id>/', views.ViAlActividades, name='ViAlActividades'),
+    path('AgregarActividad/', views.AgregarActividad, name='AgregarActividad'),
+    path('ActividadComentarios/<int:id_actividad>', views.ActividadComentarios, name='ActividadComentarios'),
+    path('comentarioPrivActividad/<int:id_actividad>/<int:id_alumno>',views.comentarioPrivActividad,name="comentarioPrivActividad"),
+    path('subirActividad/<int:id_actividad_parm>',views.subirActividad,name="subirActividad"),
+   
     path('Registro/', views.Registro, name='Registro'),
     path('Login/', views.Login, name='Login'),
     path('Home/', views.Home, name="Home"),
@@ -60,8 +66,13 @@ urlpatterns = [
     path('ComentarAnucio/<int:publicacion>/<str:codigo>',views.ComentarPublicacion,name="ComentarPublicacion"),
     path('EliminarComentarioAnucio/<int:id_coment>/<str:codigo>',views.eliminarComentario,name="eliminarComentario"),
     path('EliminarAnucio/<int:id_anuncio>/<str:codigo>',views.eliminarAnuncio,name="eliminarAnuncio"),
-    path('EditarComentarioAnucio/<int:id_coment>/<str:codigo>',views.editarComentario,name="editarComentario")
+    path('EditarComentarioAnucio/<int:id_coment>/<str:codigo>',views.editarComentario,name="editarComentario"),
     # path('articulos/',views.articulos,name="articulos"),
     # path('articulo/',views.arcticulo,name="articulo"),
-
+    path('invitarProyecto/<str:codigo>',views.invitarProyecto,name="invitarProyecto"),
+    path('expulsarAlumno/<int:id_alumno>/<str:codigo>',views.expulsarAlumno,name="expulsarAlumno"),
+    path('expulsarProfesor/<int:id_profesor>/<str:codigo>',views.expulsarProfesor,name="expulsarProfesor"),
+    path('adminProyecto/<int:id_profesor>/<str:codigo>',views.adminProyecto,name="adminProyecto"),
+    path('editarPost/<int:id_anuncio>/<str:codigo>',views.editarPost,name="editarPost"),
+    path('editarAnuncio/<int:id_anuncio>/<str:codigo>',views.editarPostVista,name="editarPostVista")
 ]

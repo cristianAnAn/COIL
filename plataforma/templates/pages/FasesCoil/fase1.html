@@ -3,8 +3,9 @@
 {% block content %}
 {% include "pages/FasesCoil/fasesBase.html" %}
 <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+    {% for actividad in actividades %}
     <div class="col">
-        <a href="{% url 'ViAlActividades' %}" class="text-decoration-none text-dark">
+        <a href="{% url 'ViAlActividades' actividad.0 %}" class="text-decoration-none text-dark">
             <div class="card h-100 my-4 cardh">
                 <div class="card-body">
                     <h5 class="card-title">
@@ -16,15 +17,16 @@
                                     d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
                                 <path
                                     d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
-                            </svg> </div> Actividad de prueba
+                            </svg> </div> {{ actividad.1 }}
                     </h5>
                 </div>
                 <div class="card-footer">
-                    <small class="text-body-secondary fs-6">Se entrega el: 20/05/24</small>
+                    <small class="text-body-secondary fs-6">Publicado el: {{ actividad.3 }}</small>
                 </div>
             </div>
         </a>
     </div>
+    {% endfor %}
     {% for material in materiales %}
     <div class="col">
         <a href="{% url 'ViAlMateriales' material.0 %}" class="text-decoration-none text-dark">

@@ -1,0 +1,35 @@
+{% extends 'layouts/baseAdmin.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <h2 class="mt-4 mb-3">Editar Material</h2>
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" value="{{ material.titulo }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4">{{ material.descripcion }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" value="{{ material.fecha }}">
+                </div>
+                <div class="form-group">
+                    <label for="id_fase">ID Fase</label>
+                    <input type="number" class="form-control" id="id_fase" name="id_fase" value="{{ material.id_fase }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_profesor">ID Profesor</label>
+                    <input type="number" class="form-control" id="id_profesor" name="id_profesor" value="{{ material.id_profesor }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

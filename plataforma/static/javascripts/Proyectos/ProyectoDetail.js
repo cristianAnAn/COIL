@@ -61,6 +61,7 @@ document.getElementById('enlaceForm').addEventListener('submit', function(event)
             const a = li.querySelector('a');
             a.textContent = newUrl;
             a.href = newUrl;
+            li.querySelector('input').value = newUrl;
         }
     });
 

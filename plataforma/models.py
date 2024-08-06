@@ -101,6 +101,8 @@ class Profesor(models.Model):
 
     def save(self, *args, **kwargs):
         # Check if there is an existing image before saving a new one
+        self.nombre = self.nombre.title()
+        self.apellidos = self.apellidos.title()
         try:
             this = Profesor.objects.get(id=self.id)
             if this.imagen != self.imagen:
@@ -173,7 +175,7 @@ class Materiales(models.Model):
     descripcion = models.TextField()
     fecha = models.DateField()
     id_fase = models.BigIntegerField()
-    tema = models.CharField(max_length=100)
+    titulo = models.CharField(max_length=100)
     id_profesor = models.IntegerField()
     
     def _str_(self):
@@ -192,3 +194,77 @@ class Materiales_enlaces(models.Model):
     path = models.TextField()
     fecha = models.DateField()
     id_anuncio= models.ForeignKey(Materiales,on_delete=models.CASCADE)
+
+    #PODER ADJUNTAR ARCHIVOS EN MATERIALES
+class SubirArchivos_Materiales(models.Model):
+    path = models.FileField(upload_to='archivos_materiales', null=True, blank=True)
+    fecha = models.DateField()
+    id_material= models.ForeignKey(Materiales,on_delete=models.CASCADE)
+
+class Materiales_Comentarios_priv(models.Model):
+    comentario = models.TextField()
+    fecha = models.DateTimeField()
+    fecha_edit = models.DateTimeField()
+    id_profesor = models.ForeignKey(Profesor, null=True, on_delete=models.CASCADE)
+    id_alumno = models.ForeignKey(Alumno, null=True, on_delete=models.CASCADE)
+    id_material= models.ForeignKey(Materiales,on_delete=models.CASCADE)
+
+
+
+
+
+# APARTADO DE ACTIVIDADES (ABAJO)
+class Actividades(models.Model):
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    id_fase = models.BigIntegerField()
+    id_profesor = models.IntegerField()
+    
+    def _str_(self):
+        return self.titulo
+    
+#LINKS DE LAS ACTIVIDADES
+class Actividades_enlaces(models.Model):
+    titulo = models.TextField()
+    path = models.TextField()
+    fecha = models.DateField()
+    id_anuncio= models.ForeignKey(Actividades,on_delete=models.CASCADE)
+
+    #PODER ADJUNTAR ARCHIVOS EN ACTIVIDADES
+class SubirArchivos_Actividades(models.Model):
+    path = models.FileField(upload_to='archivos_actividades', null=True, blank=True)
+    fecha = models.DateField()
+    id_actividad= models.ForeignKey(Actividades,on_delete=models.CASCADE)
+    
+#HACER COMENTARIOS 
+class Actividades_Comentarios(models.Model):
+    comentario = models.TextField()
+    fecha = models.DateTimeField()
+    fecha_edit = models.DateTimeField()
+    id_profesor = models.ForeignKey(Profesor, null=True, on_delete=models.CASCADE)
+    id_alumno = models.ForeignKey(Alumno, null=True, on_delete=models.CASCADE)
+    id_actividad= models.ForeignKey(Actividades,on_delete=models.CASCADE)
+
+
+#HACER COMENTARIOS PRIVADOS
+class Actividades_Comentarios_priv(models.Model):
+    comentario = models.TextField()
+    fecha = models.DateTimeField()
+    fecha_edit = models.DateTimeField()
+    id_profesor = models.ForeignKey(Profesor, null=True, on_delete=models.CASCADE)
+    id_alumno = models.ForeignKey(Alumno, null=True, on_delete=models.CASCADE)
+    id_actividad= models.ForeignKey(Actividades,on_delete=models.CASCADE)
+
+#TODO: Entregas
+class Entregas_Actividades(models.Model):
+    path = models.FileField(upload_to='entregas', null=True, blank=True)
+    fecha = models.DateField()
+    id_actividad= models.ForeignKey(Actividades,on_delete=models.CASCADE)
+    id_alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+
+class Asignar_actividad(models.Model):
+    id_alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+    id_actividad = models.ForeignKey(Actividades, on_delete=models.CASCADE)
+    calificacion = models.IntegerField(null=True)
+    entregada = models.BooleanField(default=False)

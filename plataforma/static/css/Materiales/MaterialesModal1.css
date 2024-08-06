@@ -1,0 +1,55 @@
+/* Estilos generales para el contenedor de comentarios */
+#comentarios-container {
+    margin-top: 0.5rem; /* Espacio superior reducido */
+}
+
+/* Estilos para los comentarios */
+.comentario {
+    border: 1px solid #ddd; /* Borde ligero para los comentarios */
+    border-radius: .375rem; /* Bordes redondeados */
+    padding: 0.5rem; /* Espacio interno reducido */
+    margin-bottom: 0.5rem; /* Espacio inferior reducido */
+    background-color: #f8f9fa; /* Color de fondo claro */
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075); /* Sombra ligera */
+}
+
+/* Estilos para los comentarios de profesor */
+.comentario .comentarioConfig {
+    float: right; /* Alinea a la derecha */
+}
+
+/* Mover el botón de responder hacia abajo */
+.comentario a.btn-outline-primary {
+    display: block; /* Hacer que el botón sea un bloque */
+    margin-top: 0.5rem; /* Espacio adicional arriba del botón reducido */
+}
+
+/* Hacer el texto de la fecha y hora en negrita */
+.comentario .text-muted {
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Estilo para el formulario de comentarios */
+#comentarios-container form {
+    display: flex; /* Utiliza flexbox para el formulario */
+    gap: 0.25rem; /* Espacio entre los campos del formulario reducido */
+}
+
+/* Estilo para el input de comentario */
+#comentarios-container input[type="text"] {
+    flex: 1; /* Ocupa el espacio disponible */
+    border-radius: .375rem; /* Bordes redondeados */
+    border: 1px solid #ced4da; /* Borde */
+    padding: 0.5rem; /* Espacio interno */
+}
+
+/* Estilo para el botón de enviar */
+#comentarios-container button[type="submit"] {
+    border-radius: .375rem; /* Bordes redondeados */
+    padding: 0.5rem 1rem; /* Espacio interno */
+}
+
+/* Estilo para los mensajes de error o advertencia */
+.alert {
+    margin-top: 0.5rem; /* Espacio superior reducido */
+}

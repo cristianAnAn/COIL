@@ -47,10 +47,11 @@
         <li class="nav-item">
             <a class="nav-link {% if enlace_activo == 'tablon' %}active{% endif %}" href="{% url 'ProyectoDetail' codigo %}">Foro</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link {% if enlace_activo == 'calificaciones' %}active{% endif %}" href="{% url 'SeguimientoActividad' codigo %}">Progreso</a>
-        </li>
         {% if layout.0 == "Profesor" %}
+        <li class="nav-item">
+            <a class="nav-link {% if enlace_activo == 'calificaciones' %}active{% endif %}" href="{% url 'SeguimientoActividad' codigo %}">Revisar Actividades</a>
+        </li>
+        
         <li class="nav-item">
             <a class="nav-link {% if enlace_activo == 'configurar' %}active{% endif %}" href="{% url 'ConfiguracionProyecto' codigo %}"><span class="material-symbols-outlined">
                     settings

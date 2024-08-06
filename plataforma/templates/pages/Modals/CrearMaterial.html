@@ -1,3 +1,7 @@
+{% load static %}
+{% include "pages/Modals/AgregarEnlaceAnuncio.html" %}
+<link rel="stylesheet" href="{% static 'css/Materiales/MaterialesModal1.css' %}">
+
 <div class="modal fade" id="crearMaterial2">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -8,7 +12,7 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="{% url 'AgregarMaterial' %}" method="post">
+                <form id="materialForm" action="{% url 'AgregarMaterial' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="titulo" class="form-label">Tema</label>
@@ -18,16 +22,34 @@
                         <label for="descripcion" class="form-label">Descripción (opcional)</label>
                         <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
                     </div>
+                    
+
                     <div class="mb-3">
                         <label for="fase_publicacion_material" class="form-label">Fase donde se publicará</label>
                         <select id="fase_publicacion_material" name="fase_publicacion_material" class="form-select" required>
                             {% for fase in fases %}
-                                <option value="{{ fase.0 }}">{{ fase.1 }}</option>
+                            <option value="{{ fase.0 }}">{{ fase.1 }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary boton">Guardar</button>
+                    <div id="linkContainer" class="mb-3">
+                        <!-- Los campos de enlace se agregarán aquí -->
+                    </div>
+                    <div class="container mb-3">
+                        <label class="form-label">Agrega</label>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#Enlaces">
+                            <i class="bi bi-link-45deg"></i> Enlaces
+                        </button>
+                        <!-- Lista de enlaces -->
+                        <div class="container mt-3">
+                            <ul id="enlacesList" class="list-group"></ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="files">Archivos Adicionales</label>
+                        <input type="file" class="form-control-file" id="files" name="files" multiple>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
             <!-- Modal footer -->

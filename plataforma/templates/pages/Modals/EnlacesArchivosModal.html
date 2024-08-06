@@ -1,4 +1,5 @@
 <!-- Modal para enlaces -->
+{% load static %}
 <div class="modal fade" id="Enlaces{{ enlace.0 }}" tabindex="-1" aria-labelledby="joinClassModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -8,9 +9,11 @@
             </div>
             <div class="modal-body text-center mt-1 mb-1">
                 {% if enlace.5 == "www.youtube.com" %}
-                    <iframe width="560" height="315" src="{{ enlace.2 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <input type="hidden" class="youtubeUrl" value="{{ enlace.2 }}">
+                    <iframe width="100%" height="400" src="" class="youtubeMedia" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 {% elif enlace.5 == "youtu.be" %}
-                    <iframe width="560" height="315" src="{{ enlace.2 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <input type="hidden" class="youtubeShort" value="{{ enlace.2 }}">
+                    <iframe width="100%" height="400" src="" class="youtubeMediaShort" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 {% elif enlace.5 == "view.genially.com" %}
                     <iframe src="{{ enlace.2 }}" style="width:100%; height:500px;"></iframe>
                 {% else %}
@@ -25,3 +28,4 @@
         </div>
     </div>
 </div>
+
