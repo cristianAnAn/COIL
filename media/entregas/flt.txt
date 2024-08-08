@@ -1,0 +1,14 @@
+SUBIR MATERIAL
+	- links(no abre todos, solo geneally, youtube)
+	- poder mandarle comentarios privados al profe (no se ven en otras pantallas)
+	- editar y eliminar comentarios (probablemente se quite)
+
+| 60% terminado
+_______________________________________________________
+SUBIR ACTIVIDAD
+	- Poder comentar (Alumno y profesor)
+	- poder mandarle comentarios privados al profe
+	- links(no abre link pq rechaza la conexion)
+	- editar y eliminar comentarios (probablemente se quite)
+| 30% terminado
+

@@ -1,0 +1,111 @@
+.titulo{
+    background-color: #36A0ED;
+    color: white;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+/* fasesBase.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.titulo {
+    text-align: center;
+    color: #4a90e2;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    color: #333;
+    background-color: #eaf2f8;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px 0 10px;
+}
+
+div {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+embed {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+}
+
+.btn-secondary {
+    background-color: #7f8c8d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.btn-secondary:hover {
+    background-color: #6c757d;
+}
+
+.btn-primary[disabled], .btn-secondary[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.titulo-2{
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+.fecha{
+    font-weight: bold;
+    font-size: 15px;
+    color: gray;
+}
+.opciones-ocultas {
+    display: none;
+}
+.opciones-visibles {
+    display: block;
+}

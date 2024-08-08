@@ -1,61 +1,24 @@
 {% extends 'layouts/baseAdmin.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/Actividades/SeguimientoActividad.css' %}">
-{% include "layouts/ClaseBase.html" %}
-<div>
+<link rel="stylesheet" href="{% static 'css/FasesCoil/fasesBase.css' %}"><div>
+    {% include "layouts/ClaseBase.html" %}
+    
     <h1 class="titulo">Progreso del grupo</h1>
 </div>
-<h2 class="tema mt-2 mb-2">Avance por fase</h2>
-<div class="container mt-3">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Alumnos</th>
-                {% for fase in fases %}
-                <th>{{fase.1}}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for alumno in alumnos %}
-            <tr>
-                <td>{{alumno.0}} {{alumno.1}}</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-                <td>0%</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+    {% for alumno in alumnos %}
+    <div class="col">
+        <a href="{% url 'SeguimientoAct' codigo alumno.2 %}" class="text-decoration-none text-dark">
+            <div class="card h-100 my-4 cardh">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <div class="icono"><i class="bi bi-award"></i> </div> {{alumno.0}} {{alumno.1}}
+                    </h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
 </div>
-{% for fase in fases %}
-<h2 class="tema mt-2 mb-2">{{fase.1}}</h2> <h2 class="tema mt-2 mb-2">Puntuación total: {{fase.2}}</h2>
-<div class="container mt-3">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Alumnos</th>
-                <th>Actividad de prueba</th>
-                <th>Porcentaje total</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for alumno in alumnos %}
-            <tr>
-                <td>{{alumno.0}} {{alumno.1}}</td>
-                <td>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">
-                    </div>
-                </td>
-                <td>0%</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endfor %}
 {% endblock %}

@@ -3,6 +3,10 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/Actividades/ActividadesModal1.css' %}">
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 <div class="container-fluid">
     <div class="row">
@@ -209,14 +213,33 @@
             // Evento para manejar la entrega del archivo
             botonEntregar.addEventListener('click', function() {
                 if (archivoInput.files.length > 0) {
-                    // Aquí puedes agregar el código para manejar el archivo, por ejemplo, subirlo o mostrar una vista previa
-                    alert('Archivo(s) seleccionado(s) y listo para entregar.');
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Archivo(s) seleccionado(s)!',
+                        text: 'Tu archivo está listo y entregado.',
+                    });
                 } else {
-                    alert('Por favor, selecciona un archivo.');
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '¡Oops!',
+                        text: 'Por favor, selecciona un archivo.',
+                    });
                 }
             });
         });
-        </script>
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            var linkModal = document.getElementById('linkModal');
+            linkModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget; // Botón que disparó el modal
+                var link = button.getAttribute('data-link'); // Enlace del botón
+    
+                var modalIframe = linkModal.querySelector('#linkModalIframe');
+                modalIframe.src = link;
+            });
+        });
+    </script>
+    
         
 <script>
     document.addEventListener('DOMContentLoaded', function () {

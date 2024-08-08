@@ -26,6 +26,12 @@ urlpatterns = [
     path('ActividadComentarios/<int:id_actividad>', views.ActividadComentarios, name='ActividadComentarios'),
     path('comentarioPrivActividad/<int:id_actividad>/<int:id_alumno>',views.comentarioPrivActividad,name="comentarioPrivActividad"),
     path('subirActividad/<int:id_actividad_parm>',views.subirActividad,name="subirActividad"),
+
+    #PATH DEL SEGUIMIENTO DE LAS ACTIVIDADES DEL MALUMNO
+    path('SeguimientoAct/<str:codigo>/<int:id_alumno>',views.SeguimientoAct,name="SeguimientoAct"),
+    path('calificarActividad/<int:id_entrega>/<int:id_alumno>/<str:codigo>',views.calificarActividad,name="calificarActividad"),
+    path('anularCalificacionActividad/<int:id_entrega>/<int:id_alumno>/<str:codigo>',views.anularCalificacionActividad,name="anularCalificacionActividad"),
+
    
     path('Registro/', views.Registro, name='Registro'),
     path('Login/', views.Login, name='Login'),

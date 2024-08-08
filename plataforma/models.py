@@ -266,5 +266,5 @@ class Entregas_Actividades(models.Model):
 class Asignar_actividad(models.Model):
     id_alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
     id_actividad = models.ForeignKey(Actividades, on_delete=models.CASCADE)
-    calificacion = models.IntegerField(null=True)
+    calificacion = models.BooleanField(null=True)
     entregada = models.BooleanField(default=False)

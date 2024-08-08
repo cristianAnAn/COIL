@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
 from django.contrib.auth.decorators import login_required
-from .models import SubirArchivos_Actividades, SubirArchivos_Materiales, Usuario, Catalogo, Alumno, Profesor, Rol, Anuncios_archivos, Entregas_Actividades
+from .models import Actividades, SubirArchivos_Actividades, SubirArchivos_Materiales, Usuario, Catalogo, Alumno, Profesor, Rol, Anuncios_archivos, Entregas_Actividades
 import json
 from django.contrib  import messages
 from datetime import datetime
@@ -540,6 +540,7 @@ def ProyectoDetail(request, codigo):
                 archivos = cursor.fetchall()
                 archivos_dict[anuncio[0]] = archivos
             archivos_list = [(anuncio_id, archivos) for anuncio_id, archivos in archivos_dict.items()]
+
             enlaces_dict = {}
             for anuncio in anuncios:
                 cursor.callproc('verEnlacesAnuncios', [anuncio[0]])
@@ -608,32 +609,32 @@ def ConfiguracionProyecto(request, codigo):
 def SeguimientoActividad(request, codigo):
     layout = LlenarLayout(request)
     usuario = request.user
-    tipo_usuario = usuario.rol.nombre
-    comprobacion = ComprobarCodigoUsuario(request,codigo)
+    comprobacion = ComprobarCodigoUsuario(request, codigo)
+    
     if comprobacion == 'No inscrito':
-        return render('EntrarProyecto', codigo)
+        return redirect('EntrarProyecto', codigo=codigo)
     elif comprobacion == 'Inscrito':
         with connection.cursor() as cursor:
             cursor.callproc('BuscarProyectoByCodigo', [codigo])
             proyectoDetails = cursor.fetchall()
+            
             cursor.callproc('buscarProyectoPorCodigo', [codigo])
             proyectoCodigo = cursor.fetchone()[0]
-            cursor.callproc('ListasFasesByProyecto', [proyectoCodigo])
-            fases = cursor.fetchall()
+            
+            
             cursor.callproc('BuscarProyectoAlumnos', [proyectoCodigo])
             alumnos = cursor.fetchall()
-            return render(request,'pages/Actividades/SeguimientoActividad.html',{
+            
+            return render(request, 'pages/Actividades/SeguimientoActividad.html', {
                 'enlace_activo': 'calificaciones',
                 'proyectoDetails': proyectoDetails,
                 'codigo': codigo,
-                'usuario' : usuario,
-                'layout' : layout,
-                'fases': fases,
-                'alumnos': alumnos})
+                'usuario': usuario,
+                'layout': layout,
+                'alumnos': alumnos
+            })
     else:
-        return redirect('Error', comprobacion)
-
-
+        return redirect('Error', mensaje=comprobacion)
 
 @csrf_protect
 @login_required(login_url='Login')
@@ -1985,3 +1986,79 @@ def subirActividad(request, id_actividad_parm):
             with connection.cursor() as cursor:
                 cursor.callproc('entregarActividad', [id_alumno_log, id_actividad_parm])
     return redirect('ViAlActividades', id_actividad_parm)
+
+###########################}
+#SEGUMINETO DE LAS ACTIVIDADES DEL ALUMNO
+@csrf_protect
+@login_required(login_url='Login')
+def SeguimientoAct(request,codigo,id_alumno):
+    layout = LlenarLayout(request)
+    comprobacion = ComprobarCodigoUsuario(request,codigo)
+    alumno = Alumno.objects.filter(id=id_alumno).values('nombre', 'apellidos').first()
+    if comprobacion == 'No inscrito':
+        return redirect('EntrarProyecto', codigo)
+    elif comprobacion == 'Inscrito':
+
+        with connection.cursor() as cursor:
+            cursor.callproc('BuscarProyectoByCodigo', [codigo])
+            proyectoDetails = cursor.fetchall()
+
+            cursor.callproc('buscarProyectoPorCodigo', [codigo])
+            proyectoCodigo = cursor.fetchone()[0]
+            cursor.callproc('ListasFasesByProyecto', [proyectoCodigo])
+            fases = cursor.fetchall()
+
+            cursor.callproc('obtener_actividades_by_alumno', [id_alumno])
+            actividades = cursor.fetchall()
+
+            cursor.callproc('obtener_entregas_by_alumno', [id_alumno])
+            entregas = cursor.fetchall()
+
+        return render(request, 'pages/Actividades/Seguimiento_Act.html', {
+            'codigo': codigo,
+            'layout': layout,
+            'proyectoDetails': proyectoDetails,
+            'fases': fases,
+            'actividades': actividades,
+            'alumno': alumno,
+            'entregas': entregas,
+            'id_alumno': id_alumno
+        })
+    else:
+        return redirect('Error', comprobacion)
+    
+@login_required(login_url='Login')
+def calificarActividad(request, id_entrega, id_alumno, codigo):
+    usuario = request.user
+    tipo_usuario = usuario.rol.nombre
+    try:
+        if tipo_usuario == 'Alumno':
+            return redirect('Error', 'No tienes permisos parar realizar esto')
+        elif tipo_usuario == 'Profesor':
+            with connection.cursor() as cursor:
+                cursor.callproc('calificarActividad', [id_entrega])
+                resultado = cursor.fetchone()[0]
+                if resultado == 'Calificada con exito':
+                    return redirect('SeguimientoAct', codigo, id_alumno)
+                else:
+                    return redirect('Error', resultado)
+    except (Alumno.DoesNotExist, Profesor.DoesNotExist):
+        return redirect('logout')
+    
+@login_required(login_url='Login')
+def anularCalificacionActividad(request, id_entrega, id_alumno, codigo):
+    usuario = request.user
+    tipo_usuario = usuario.rol.nombre
+    try:
+        if tipo_usuario == 'Alumno':
+            return redirect('Error', 'No tienes permisos parar realizar esto')
+        elif tipo_usuario == 'Profesor':
+            with connection.cursor() as cursor:
+                cursor.callproc('descalificarActividad', [id_entrega])
+                resultado = cursor.fetchone()[0]
+                if resultado == 'Anulada con exito':
+                    return redirect('SeguimientoAct', codigo, id_alumno)
+                else:
+                    return redirect('Error', resultado)
+    except (Alumno.DoesNotExist, Profesor.DoesNotExist):
+        return redirect('logout')
