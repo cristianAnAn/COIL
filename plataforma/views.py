@@ -120,6 +120,7 @@ def LlenarLayout(request):
 @login_required(login_url='Login')
 def ListaProyectos(request):
     usuario = request.user
+    contexto = 'activo'
     if usuario.is_firstRegister == True and usuario.rol.nombre == 'Profesor':
         logout(request)
         return redirect('Login')
@@ -146,12 +147,14 @@ def ListaProyectos(request):
         return render(request, 'pages/Proyectos/ListaProyectos.html', {
             'proyectos': proyectos,
             'usuario' : usuario,
-            'layout' : layout})
+            'layout' : layout,
+            'contexto': contexto})
 @csrf_protect
 @login_required(login_url='Login')
 def ListaArchivoProyectos(request):
     layout = LlenarLayout(request)
     usuario = request.user
+    contexto = 'archivo'
     tipo_usuario = usuario.rol.nombre
     try:
         if tipo_usuario == "Alumno":
@@ -174,7 +177,8 @@ def ListaArchivoProyectos(request):
         'rol': tipo_usuario,
         'proyectos': proyectos,
         'usuario' : usuario,
-        'layout' : layout})
+        'layout' : layout,
+        'contexto': contexto})
 def generar_codigo_unico():
     while True:
         codigo = random.randint(-999999999, 999999999)

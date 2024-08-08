@@ -4,25 +4,38 @@
 <link href="{% static 'css/Proyectos/ListaProyectos.css' %}" rel="stylesheet">
 <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for proyecto in proyectos %}
-<div class="col">
-<a href="{% url 'FasesCoil' proyecto.5 %}" class="text-decoration-none text-dark ">
-    <div class="card h-100 my-4 {{proyecto.4}}">
-        <div class="card-body">
-            <h5 class="card-title">{{proyecto.1}}</h5>
-            <h6 class="card-text">{{proyecto.2}}</h6>
-            <h6 class="card-text">{{proyecto.3}}</h6>
-        </div>
-        <div class="card-footer">
-            <small class="text-body-secondary fs-6">
-                {% for nombre in proyecto.6 %}
-                    {{ nombre }} {% if not forloop.last %} |{% endif %}
-                {% endfor %}
-            </small>
-        </div>
+    <div class="col">
+        <a href="{% url 'FasesCoil' proyecto.5 %}" class="text-decoration-none text-dark ">
+            <div class="card h-100 my-4 {{proyecto.4}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{proyecto.1}}</h5>
+                    <h6 class="card-text">{{proyecto.2}}</h6>
+                    <h6 class="card-text">{{proyecto.3}}</h6>
+                </div>
+                <div class="card-footer">
+                    <small class="text-body-secondary fs-6">
+                        {% for nombre in proyecto.6 %}
+                        {{ nombre }} {% if not forloop.last %} |{% endif %}
+                        {% endfor %}
+                    </small>
+                </div>
+            </div>
+        </a>
     </div>
-</a>
-</div>
+
 {% empty %}
+
+    {% if layout.0 == "Profesor" and contexto == "activo" %}
+    <div class="container">
+        <div class="alert alert-success" role="alert" style="font-size: 25px;">
+            Bienvenido {{layout.2}}, pulsa el icono de "<span class="material-symbols-outlined">add</span>" para crear o unirte a un proyecto
+        </div></div>
+    {% elif layout.0 == "Alumno" and contexto == "activo" %}
+    <div class="container">
+        <div class="alert alert-info" role="alert" style="font-size: 25px;">
+            Bienvenido {{layout.2}}, pulsa el icono de "<span class="material-symbols-outlined">add</span>" para unirte a un proyecto
+        </div></div>
+    {% endif %}
 
 {% endfor %}
 </div>
